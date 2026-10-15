@@ -2,6 +2,8 @@
 
 Ruiyi Zhang
 
+DOI: [10.5281/zenodo.23396431](https://doi.org/10.5281/zenodo.23396431)
+
 Let `E(X)` count the positive even integers at most `X` that are not sums of two primes. The
 manuscript proves `E(X) << X^(11/20 + eps)` for every `eps > 0`.
 
@@ -30,3 +32,19 @@ python3 cert1120.py
 
 The output should equal `cert1120.out`. The script checks only the finite sums; the analytic
 reduction to them is proved in the manuscript.
+
+## Citation
+
+Ruiyi Zhang, *The Goldbach exceptional set: an exponent 11/20*, preprint, Zenodo, 2026. https://doi.org/10.5281/zenodo.23396431
+
+```bibtex
+@misc{zhang2026goldbach1120,
+  author    = {Zhang, Ruiyi},
+  title     = {The Goldbach exceptional set: an exponent 11/20},
+  year      = {2026},
+  publisher = {Zenodo},
+  note      = {Preprint},
+  doi       = {10.5281/zenodo.23396431},
+  url       = {https://doi.org/10.5281/zenodo.23396431}
+}
+```
