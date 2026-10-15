@@ -1,0 +1,2670 @@
+\documentclass{amsart}
+
+\usepackage{amssymb,mathtools,array,longtable}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\hypersetup{pdftitle={The Goldbach exceptional set: an exponent 11/20},pdfauthor={Ruiyi Zhang}}
+
+\makeatletter
+\def\LT@makecaption#1#2#3{\LT@mcol\LT@cols c{\hbox to\z@{\hss
+\parbox[t]\textwidth{\normalsize\@tempcnta=64 \@makecaption{#2}{#3}}\hss}}}
+\makeatother
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}[lemma]{Proposition}
+\newtheorem{corollary}[lemma]{Corollary}
+\newtheorem{bilinearlemma}{Lemma}
+\renewcommand{\thebilinearlemma}{B}
+\newtheorem{primeboxlemma}{Lemma}
+\renewcommand{\theprimeboxlemma}{C}
+\newcounter{fact}
+\renewcommand{\thefact}{F\arabic{fact}}
+\newenvironment{fact}{\refstepcounter{fact}\par\medskip
+\noindent\textbf{(\thefact)}\ }{\par\medskip}
+\numberwithin{equation}{section}
+\numberwithin{table}{section}
+\allowdisplaybreaks[1]
+
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\R}{\mathbb R}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\ind}{\mathbf 1}
+\newcommand{\M}{\mathfrak M}
+\newcommand{\m}{\mathfrak m}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\vol}{\operatorname{vol}}
+\newcommand{\Si}{\operatorname{Si}}
+\newcommand{\conv}{\operatorname{conv}}
+\newcommand{\sums}{\sideset{}{^*}\sum}
+\newcommand{\ccert}{c_{\mathrm{cert}}}
+
+\begin{document}
+
+\title{The Goldbach exceptional set: an exponent 11/20}
+\author{Ruiyi Zhang}
+\address{Independent Researcher, Columbia, Maryland, USA}
+\email{ryzfsu@gmail.com}
+\subjclass[2020]{Primary 11P32; Secondary 11N35, 11M26}
+\keywords{Goldbach problem, exceptional set, Harman sieve, Bombieri--Vinogradov theorem, Dirichlet $L$-functions}
+
+\begin{abstract}
+We prove $E(X)\ll_\varepsilon X^{11/20+\varepsilon}$ for every
+$\varepsilon>0$. Here $E(X)$ counts the positive even integers at most $X$
+that are not sums of two primes. A four-level Harman decomposition gives
+a signed prime minorant. Exact rational bounds for four discarded families
+give a positive lower bound for its logarithmically weighted mass.
+We prove a Bombieri--Vinogradov estimate at level $X^{9/20-\eta}$,
+with both maxima and a divisor weight. We also bound the exponential sum
+of the same weight on the minor arcs. The major arcs use classical
+zero-density estimates and the zero-free half-plane $\Re s>7/8$ of
+OpenAI \cite[Theorem~1.1]{OA}.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}\label{sec:introduction}
+
+Let $\PP$ denote the set of primes, and put
+\begin{equation}\label{eq:exceptional-set}
+E(X)=\#\{n\in\N:n\le X,\ 2\mid n,\ n\ne p+p'
+\text{ for all }p,p'\in\PP\}.
+\end{equation}
+The two primes need not be distinct.
+
+\begin{theorem}\label{thm:main}
+For every $\varepsilon>0$,
+\begin{equation}
+E(X)\ll_\varepsilon X^{11/20+\varepsilon}.
+\end{equation}
+\end{theorem}
+
+Pintz and Alth\"ofer obtain the exponent $7/12$ from the zero-free
+theorem (\ref{fact:zero-free}) below, and Pintz's method gives $3/5$ under
+$H_{7/8}$. Theorem~\ref{thm:main} improves both exponents:
+\[
+\frac{11}{20}<\frac7{12}<\frac35.
+\]
+
+The hypothesis and the precise citations are stated below.
+The $7/8$ zero-free theorem is an external input and is not reproved here.
+
+\subsection{The zero-free hypothesis}\leavevmode\par
+\noindent\textbf{Hypothesis $H_{7/8}$.}
+For every Dirichlet character $\chi$,
+\begin{equation}\label{eq:H}
+L(s,\chi)\ne0\qquad(\Re s>7/8).
+\tag{$H_{7/8}$}
+\end{equation}
+This includes the character modulo $1$, whose $L$-function is $\zeta(s)$.
+The functional equation then gives
+\begin{equation}\label{eq:zero-strip}
+\frac18\le\beta\le\frac78
+\end{equation}
+for every nontrivial zero $\varrho=\beta+i\gamma$.
+An imprimitive character has the same nontrivial zeros as its inducing
+primitive character.
+
+\begin{theorem}\label{thm:conditional}
+Assume $H_{7/8}$. For every $\varepsilon>0$,
+\begin{equation}
+E(X)\ll_\varepsilon X^{11/20+\varepsilon}.
+\end{equation}
+\end{theorem}
+
+\begin{fact}\label{fact:zero-free}
+\cite[Theorem~1.1]{OA} Every Dirichlet $L$-function, including $\zeta(s)$,
+is zero-free in $\Re s>7/8$.
+\end{fact}
+
+\begin{fact}\label{fact:comparison}
+\cite[Theorem~1 and Corollary~2]{PA} Theorem~1 assumes a common zero-free
+half-plane $H_{\theta_0}$. Corollary~2 invokes
+\cite[Theorem~1.1]{OA} and gives the exponent $7/12$ without a hypothesis
+in its statement. The exponent obtained from Pintz's method under
+$H_{7/8}$ is $3/5$; see \cite[Sections~6--8]{Pi}.
+\end{fact}
+
+Theorem~\ref{thm:main} follows from Theorem~\ref{thm:conditional} and
+(\ref{fact:zero-free}); the short proof is in Section~\ref{sec:proof-main}.
+
+\subsection{The method}
+
+We construct a signed minorant on $I=(X/8,X/4]$.
+Every discarded term is nonnegative, and every negative term is retained
+or expanded. The loss of mass comes from four discarded families, and
+their rational upper bounds give
+\begin{equation}\label{eq:intro-mass}
+\sum_{m\in I}(\log m)\rho(m)
+\ge\left(\frac{\ccert}{8}-o(1)\right)X,
+\qquad
+\ccert=\frac{342155430899}{2250000000000}>\frac3{20}.
+\end{equation}
+Only a lower bound is asserted.
+
+Put $\lambda(m)=(\log m)\rho(m)$; this weight is used throughout.
+Its distribution estimate keeps both maxima inside the modulus sum
+and includes the factor $2^{\omega(d)}$.
+The minor-arc estimate is
+\[
+\sup_{\alpha\in\mathfrak m}|S_\lambda(\alpha)|
+\ll X^{31/40+\eta/2}L^{9/2}.
+\]
+Under $H_{7/8}$ the major arcs contribute at least $0.025X$, and the
+resulting dyadic exceptional-set bound is
+\[
+|\mathcal E_X|\ll\frac{\mathcal S^2L}{X}
+\ll X^{31/20+\eta-1}L^{10}
+=X^{11/20+\eta}L^{10}=X^{1-t}L^{10}.
+\]
+The major-arc argument follows \cite[Section~8]{Pi}. We derive the
+required mean square from zero-density estimates and do not use
+\cite[(8.25)]{Pi}. Heath-Brown's $20/9$ estimate limits this argument to
+levels $t<9/20$. The mass, distribution and minor-arc estimates are all
+unconditional.
+
+\section{Notation and parameters}\label{sec:notation}
+
+Write $L=\log X$ and $e(x)=e^{2\pi ix}$.
+Given $\varepsilon>0$, choose
+\begin{equation}\label{eq:parameters}
+\begin{gathered}
+\eta=\min(\varepsilon/2,1/100),\qquad
+T=\frac9{20},\qquad t=\frac9{20}-\eta,\\
+\varepsilon_0=\frac\eta{10},\qquad
+X_1=X^{1-\varepsilon_0},\qquad
+\varepsilon_{\mathrm{HB}}=\frac\eta{90}.
+\end{gathered}
+\end{equation}
+The decomposition level $T$ is fixed, and the analysis level is $t$.
+Put
+\begin{equation}\label{eq:scales}
+z=X^{1/10},\qquad A=X^{9/20},\qquad D=X^{11/20},
+\qquad I=(X/8,X/4].
+\end{equation}
+Then
+\begin{equation}\label{eq:scale-identities}
+Az=D,\qquad AD=X,\qquad z^4<A<z^5,\qquad z^{10}=X.
+\end{equation}
+Let $P$ be any integer satisfying
+\begin{equation}\label{eq:P-window}
+\frac12X^t\le P\le X^t.
+\end{equation}
+All estimates are uniform in this choice. We keep the three parameters
+\begin{equation}\label{eq:Q-parameters}
+Q_P=X/P,\qquad Q_B=X^t,\qquad Q_0=\lceil2X/P\rceil
+\end{equation}
+distinct; they govern arc widths, distribution and Dirichlet approximation.
+The choice of $\varepsilon_0$ gives
+\begin{equation}\label{eq:density-margin}
+1-\varepsilon_0-\frac{20}{9}t=\frac{191}{90}\eta>0.
+\end{equation}
+For large $X$,
+\begin{equation}\label{eq:elementary-ranges}
+\begin{gathered}
+2P^2<X,\qquad D\le X/P\le2X^{11/20+\eta},\\
+P<X^{1/2}<X_1\le X/8,\qquad A^{3/2}=X^{27/40}.
+\end{gathered}
+\end{equation}
+Implied constants may depend on fixed saving exponents and on $\eta$.
+They are uniform in all variables within the stated ranges.
+
+Let $P^-(v)$ be the least prime factor of $v$, with $P^-(1)=+\infty$, and put
+\[
+\psi(v,w)=\ind_{P^-(v)\ge w}.
+\]
+
+Thus $\psi(1,w)=1$, and we call $v$ with $\psi(v,w)=1$ \emph{$w$-rough}.
+The function $\Omega(v)$ counts prime factors with multiplicity.
+In $2^{\omega(d)}$ the function $\omega(d)$ counts distinct prime factors;
+elsewhere $\omega(u)$ denotes Buchstab's function:
+\begin{equation}\label{eq:buchstab-definition}
+\omega(u)=1/u\quad(1\le u\le2),\qquad
+(u\omega(u))'=\omega(u-1)\quad(u>2).
+\end{equation}
+Buchstab's function is continuous on $[1,\infty)$.
+
+For $f:\N\to\mathbb C$, put
+\begin{equation}\label{eq:Delta}
+\Delta_f(d)=\max_{(a,d)=1}\max_{y\le X}
+\left|\sum_{\substack{m\le y\\m\equiv a\pmod d}}f(m)
+-\frac1{\varphi(d)}\sum_{\substack{m\le y\\(m,d)=1}}f(m)\right|.
+\end{equation}
+Both maxima are part of this definition, and subadditivity and cutoff
+monotonicity give
+\begin{equation}\label{eq:cutoffs}
+\Delta_{f\ind_{[1,Y]}}\le\Delta_f,\qquad
+\Delta_{f\ind_{(Y_1,Y_2]}}\le2\Delta_f
+\end{equation}
+for endpoints at most $X$.
+
+Let $\|x\|$ denote the distance to the nearest integer, and define
+\begin{equation}\label{eq:arcs}
+\begin{aligned}
+\M(q,a)&=\{\alpha\in\R/\Z:\|\alpha-a/q\|\le1/(qQ_P)\},\\
+\M&=\bigcup_{q\le P}\ \bigcup_{\substack{a\bmod q\\(a,q)=1}}\M(q,a),
+\qquad \m=(\R/\Z)\setminus\M.
+\end{aligned}
+\end{equation}
+These arcs are disjoint, since distinct reduced fractions are at distance
+at least $1/(qq')$ and $q+q'\le2P<Q_P$.
+Once $\lambda$ is defined, put
+\begin{equation}\label{eq:exponential-sums}
+S(\alpha)=\sum_{X_1<p\le X}(\log p)e(p\alpha),\qquad
+S_\lambda(\alpha)=\sum_{m\in I}\lambda(m)e(m\alpha).
+\end{equation}
+For $\mathfrak B=\M$ or $\m$, write
+\[
+I_{\mathfrak B}(n)=\int_{\mathfrak B}S(\alpha)S_\lambda(\alpha)e(-n\alpha)\,d\alpha.
+\]
+Finally,
+\[
+c_q(v)=\sum_{\substack{a\bmod q\\(a,q)=1}}e(av/q).
+\]
+A star on a character sum restricts it to primitive characters.
+
+\section{The four-level Harman weight}\label{sec:weight}
+
+\subsection{Two exact identities}
+
+\begin{lemma}\label{lem:elementary-identities}
+For every integer $m>z^2$,
+\begin{equation}\label{eq:prime-isolation}
+\ind_{\PP}(m)=\psi(m,z)
+-\sum_{\substack{p\mid m\\p\ge z,\ p^2\le m}}\psi(m/p,p).
+\end{equation}
+For $k\ge1$ and $z\le y$,
+\begin{equation}\label{eq:buchstab-step}
+\psi(k,y)=\psi(k,z)
+-\sum_{\substack{p\mid k\\z\le p<y}}\psi(k/p,p).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+If $m$ is prime, the sum in \eqref{eq:prime-isolation} is empty.
+If $m$ is composite and $z$-rough, only $p=P^-(m)$ contributes, and this
+prime satisfies $p^2\le m$. If $P^-(m)<z$, every term on the right
+vanishes; this case includes prime powers.
+
+For \eqref{eq:buchstab-step}, the case $k=1$ is immediate.
+Otherwise put $q=P^-(k)$. For $q\ge y$ the sum is empty, and for
+$z\le q<y$ only $p=q$ contributes. For $q<z$, every term vanishes.
+\end{proof}
+
+Both identities hold when their left sides vanish, so we expand
+zero-valued terms as well.
+
+\subsection{The stopping rule}
+
+For $m\in I$, a node of depth $j$ consists of primes
+\[
+p_1>p_2>\dots>p_j\ge z,\qquad
+P_j:=p_1\cdots p_j\mid m,\qquad p_1^2\le m.
+\]
+It carries $(-1)^j\psi(m/P_j,p_j)$, and expanding it by \eqref{eq:buchstab-step} gives
+\begin{equation}\label{eq:node-expansion}
+\begin{split}
+(-1)^j\psi(m/P_j,p_j)
+={}&(-1)^j\psi(m/P_j,z)\\
+&+\sum_{\substack{p_{j+1}\mid m/P_j\\z\le p_{j+1}<p_j}}
+(-1)^{j+1}\psi(m/P_{j+1},p_{j+1}).
+\end{split}
+\end{equation}
+The first term is a retained rough leaf, denoted $R_j$, and the root is
+$R_0(m)=\psi(m,z)$.
+
+At depth $1$, stop when $A\le p_1\le D$, which gives the leaf $B_1$, and
+expand when $p_1<A$.
+At depth $2$, stop when $A\le P_2\le D$, which gives $B_2$.
+Discard the nodes with $P_2>D$, which form $U_2$, and expand every node
+with $P_2<A$.
+At depth $3$, stop when $A\le P_3\le D$, giving $B_3$, and expand both
+ranges $P_3<A$ and $P_3>D$.
+At depth $4$, stop when $A\le P_4\le D$, giving $B_4$.
+Discard all other nodes; they form $L_4$, $U_4$ and $V_4$ as specified
+below.
+
+Every depth-$1$ node has $p_1\le\sqrt{X/4}<D$.
+Every depth-$3$ node has $P_2<A$, and therefore
+\begin{equation}\label{eq:third-prime}
+p_3<p_2<P_2^{1/2}<A^{1/2},\qquad P_3<A^{3/2}=X^{27/40}.
+\end{equation}
+If $P_3>D$, then every child has $P_4>D$, so $B_4$ and $L_4$ can arise
+only from $P_3<A$. There are no nodes of depth $5$.
+
+Table~\ref{tab:families} defines every family. Each entry is summed over
+decreasing primes at least $z$ with $P_j\mid m$. The condition
+$p_1^2\le m$ is imposed in every nonempty row.
+For $p_1<A$, this condition is automatic on $I$:
+\begin{equation}\label{eq:C1-automatic}
+p_1^2<X^{9/10}<X/8<m
+\end{equation}
+for $X>8^{10}$.
+
+\begin{table}[htbp]
+\caption{Leaves of the decomposition.}\label{tab:families}
+\centering\small
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}c p{0.49\textwidth} c c@{}}
+Family&Prefix conditions&Residual&Sign\\ \hline
+$R_0$&Empty prefix&$\psi(m,z)$&$+$\\
+$R_1$&$p_1<A$&$\psi(m/p_1,z)$&$-$\\
+$R_2$&$p_1<A$, $P_2<A$&$\psi(m/P_2,z)$&$+$\\
+$R_3$&$p_1<A$, $P_2<A$, and $P_3<A$ or $P_3>D$
+&$\psi(m/P_3,z)$&$-$\\
+$B_1$&$A\le p_1\le D$&$\psi(m/p_1,p_1)$&$-$\\
+$B_2$&$p_1<A$, $A\le P_2\le D$&$\psi(m/P_2,p_2)$&$+$\\
+$B_3$&$p_1<A$, $P_2<A$, $A\le P_3\le D$
+&$\psi(m/P_3,p_3)$&$-$\\
+$B_4$&$p_1<A$, $P_2<A$, $P_3<A$, $A\le P_4\le D$
+&$\psi(m/P_4,p_4)$&$+$\\ \hline
+$U_2$&$p_1<A$, $P_2>D$&$\psi(m/P_2,p_2)$&$+$\\
+$L_4$&$p_1<A$, $P_2<A$, $P_3<A$, $P_4<A$
+&$\psi(m/P_4,p_4)$&$+$\\
+$U_4$&$p_1<A$, $P_2<A$, $P_3<A$, $P_4>D$
+&$\psi(m/P_4,p_4)$&$+$\\
+$V_4$&$p_1<A$, $P_2<A$, $P_3>D$
+&$\psi(m/P_4,p_4)$&$+$\\ \hline
+\end{tabular}
+\end{table}
+
+\begin{proposition}\label{prop:tree-identity}
+For $m\in I$,
+\begin{equation}\label{eq:tree-identity}
+\begin{split}
+\ind_{\PP}(m)={}&R_0-R_1+R_2-R_3-B_1+B_2-B_3+B_4\\
+&+U_2+L_4+U_4+V_4.
+\end{split}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Start with \eqref{eq:prime-isolation} and apply \eqref{eq:node-expansion}
+according to the stopping rule. The process terminates at depth $4$, and
+Table~\ref{tab:families} lists every terminal term with its sign.
+Every step is an exact identity.
+\end{proof}
+
+\subsection{The weight and its support}
+
+On $I$, define
+\begin{equation}\label{eq:rho-definition}
+\begin{split}
+\rho&=R_0-R_1+R_2-R_3-B_1+B_2-B_3+B_4\\
+&=\ind_{\PP}-U_2-L_4-U_4-V_4.
+\end{split}
+\end{equation}
+Set $\rho=0$ off $I$, and put
+\begin{equation}\label{eq:lambda-definition}
+\lambda(m)=(\log m)\rho(m),\qquad
+F_\lambda=\sum_{m\in I}\lambda(m).
+\end{equation}
+Every discarded term is nonnegative. Hence
+\begin{equation}\label{eq:pointwise-minorant}
+\rho(m)\le\ind_{\PP}(m),\qquad
+\lambda(m)\le(\log m)\ind_{\PP}(m).
+\end{equation}
+The weight may be negative. Every nonzero term is $z$-rough, and since
+$m\le X/4<z^{10}$, its support satisfies
+\begin{equation}\label{eq:Omega-nine}
+\Omega(m)\le9.
+\end{equation}
+A node is determined by at most four distinct prime factors of $m$, and
+it contributes at most one retained term. Thus
+\begin{equation}\label{eq:weight-sup}
+|\rho(m)|\le\sum_{j=0}^4\binom9j=256,
+\qquad |\lambda(m)|\le2^8L.
+\end{equation}
+
+For $B_j$, write $u=P_j$ and $v=m/u$; the product $u$ determines its
+ordered prime prefix. For $B_1$ we have $v>1$, since $p_1\le D<X/8$, and
+then $\psi(v,p_1)=1$ forces $v\ge p_1$. Thus $p_1^2\le m$ is automatic
+here as well.
+Every balanced family has
+\begin{equation}\label{eq:balanced-window}
+A\le u\le D,\qquad A/8<v\le D/4.
+\end{equation}
+Its only roughness coupling is $\psi(v,P^-(u))$, and no retained family
+is a bare prime sum.
+
+\section{The mass estimate}\label{sec:mass}
+
+\begin{fact}\label{fact:PNT}
+\cite[Chapters~7 and~18]{Da} We use the prime number theorem and Mertens'
+estimate in the forms
+\begin{gather*}
+\pi(x)=\frac{x}{\log x}+O\left(\frac{x}{\log^2x}\right),\qquad
+\pi(x)=\operatorname{li}(x)+O\left(\frac{x}{\log^3x}\right),\\
+\theta(x)=\sum_{p\le x}\log p=x+O(xe^{-c\sqrt{\log x}}),\\
+\sum_{y<p\le x}\frac1p
+=\log\frac{\log x}{\log y}+O\left(\frac1{\log y}\right)
+\qquad(x\ge y\ge2).
+\end{gather*}
+Here $\operatorname{li}(x)=\int_2^xdt/\log t$.
+\end{fact}
+
+\subsection{A Buchstab envelope}
+
+Put $C_\omega=71/125$ and
+\begin{equation}\label{eq:omega-envelope}
+\bar\omega(u)=
+\begin{cases}
+1,&u<1,\\
+\max(1/u,C_\omega),&u\ge1.
+\end{cases}
+\end{equation}
+
+\begin{lemma}\label{lem:omega-envelope}
+Let $\Omega_0$ be the positive root of $xe^x=1$. Then
+\[
+\sup_{u\ge2}\omega(u)=\Omega_0<C_\omega.
+\]
+The function $\bar\omega$ is continuous and non-increasing.
+For $u\ge\max(u_0,1)$,
+\[
+\omega(u)\le\bar\omega(u_0).
+\]
+Also $0\le\omega\le1$, and $\omega$ is $1$-Lipschitz.
+\end{lemma}
+
+\begin{proof}
+On $[2,3]$, equation \eqref{eq:buchstab-definition} gives
+\[
+u\omega(u)=1+\log(u-1)\qquad(2\le u\le3).
+\]
+With $w=u-1$, differentiate $(1+\log w)/(1+w)$; its maximum occurs at
+$\log w=1/w$ and equals $1/w=\Omega_0$.
+For $k\ge3$ put $M_k=\max_{[k,k+1]}\omega$. Then, for $k\le u\le k+1$,
+\[
+u\omega(u)=k\omega(k)+\int_k^u\omega(t-1)\,dt
+\le kM_{k-1}+(u-k)M_{k-1}=uM_{k-1}.
+\]
+Thus $M_k\le M_{k-1}$, and the rational inequality
+\begin{equation}\label{eq:omega-rational}
+C_\omega\sum_{j=0}^4\frac{C_\omega^j}{j!}
+=\frac{733930882351}{732421875000}>1
+\end{equation}
+proves $\Omega_0<C_\omega$.
+The envelope now follows from $\omega(u)=1/u$ on $[1,2]$.
+On this interval $|\omega'|\le1$, and for $u>2$,
+\[
+|\omega'(u)|=\frac{|\omega(u-1)-\omega(u)|}{u}\le\frac12.
+\]
+Continuity then completes the Lipschitz assertion.
+\end{proof}
+
+\subsection{Rough numbers through \texorpdfstring{$u=10$}{u=10}}
+
+Let
+\[
+\Phi(x,y)=\#\{1\le n\le x:\ p\mid n\Rightarrow p>y\}.
+\]
+This count includes $1$.
+
+\begin{lemma}\label{lem:rough-asymptotic}
+Uniformly for $y\ge2$ and $y\le x\le y^{10}$,
+\begin{equation}\label{eq:rough-asymptotic}
+\Phi(x,y)=\frac{x\omega(u)-y}{\log y}
++O\left(\frac{x}{\log^2y}\right),
+\qquad u=\frac{\log x}{\log y}.
+\end{equation}
+The implied constant is absolute.
+\end{lemma}
+
+\begin{proof}
+Let $\mathrm H(k)$ denote \eqref{eq:rough-asymptotic} for $1\le u\le k$.
+For $1\le u\le2$ no composite is counted, so
+\[
+\Phi(x,y)=1+\pi(x)-\pi(y).
+\]
+Then (\ref{fact:PNT}) and $\omega(u)=1/u$ prove $\mathrm H(2)$.
+
+Assume $\mathrm H(k)$, where $2\le k\le9$, and take $y^k<x\le y^{k+1}$.
+Decomposition by the least prime factor gives
+\begin{equation}\label{eq:rough-recursion}
+\Phi(x,y)=\Phi(x,\sqrt x)
++\sum_{y<p\le\sqrt x}\Phi(x/p,p)+E_1,
+\qquad 0\le E_1\le\frac{2x}{y}.
+\end{equation}
+The error counts the residuals divisible by the selected prime, and it is
+$O(x/\log^2y)$. The base case gives
+\[
+\Phi(x,\sqrt{x})=\frac{x}{\log x}
++O\left(\frac{x}{\log^2y}\right).
+\]
+For $y<p\le\sqrt x$ the new parameter is at most $k$. Hence
+\begin{equation}\label{eq:rough-induction-term}
+\Phi(x/p,p)=g(p)-\frac{p}{\log p}
++O\left(\frac{C_kx}{p\log^2p}\right),
+\quad
+g(s)=\frac{x}{s\log s}\omega\left(\frac{\log x}{\log s}-1\right).
+\end{equation}
+Here $C_k$ is the induction constant, and by (\ref{fact:PNT}),
+\[
+\sum_{p\le\sqrt{x}}\frac{p}{\log p}\ll\frac{x}{\log^2x},
+\qquad
+\sum_{y<p\le\sqrt{x}}\frac{C_kx}{p\log^2p}
+\le C_k\frac{x}{\log^2y}
+\left(\log 10+O\left(\frac1{\log y}\right)\right).
+\]
+The function $g$ is absolutely continuous, and
+Lemma~\ref{lem:omega-envelope} gives, almost everywhere,
+\[
+\begin{split}
+|g'(s)|
+&\le\frac{x}{s^2\log s}\left(1+\frac1{\log s}\right)
++\frac{x}{s\log s}\cdot\frac{\log x}{s\log^2s}\\
+&\le\frac{x}{s^2\log s}
+\left(1+\frac{1+u}{\log2}\right)
+\le\frac{17x}{s^2\log s}.
+\end{split}
+\]
+Stieltjes integration against $\pi=\operatorname{li}+R$ yields
+\[
+\sum_{y<p\le\sqrt{x}}g(p)
+=\int_y^{\sqrt{x}}\frac{g(s)}{\log s}\,ds
++O\left(\frac{x}{\log^3y}\right).
+\]
+With $s=x^{1/v}$, the integral equals
+\begin{align*}
+\frac{x}{\log x}\int_2^u\omega(v-1)\,dv
+&=\frac{x}{\log x}\bigl(u\omega(u)-1\bigr)\\
+&=\frac{x\omega(u)}{\log y}-\frac{x}{\log x}.
+\end{align*}
+Insert this in \eqref{eq:rough-recursion}. Since $u>2$, the term
+$y/\log y$ is absorbed by the error, and this proves $\mathrm H(k+1)$.
+The recurrence $C_{k+1}\ll1+C_k(1+\log10)$ gives an absolute $C_{10}$.
+\end{proof}
+
+The subtraction of $y$ in \eqref{eq:rough-asymptotic} is needed near
+$x=y$, so we retain it in the interval estimate.
+
+\begin{lemma}\label{lem:rough-interval}
+Let $w\ge3$ be an integer and $w'=w-1/2$.
+Uniformly for $1\le y_1<y_2\le(w')^{10}$,
+\begin{equation}\label{eq:rough-interval}
+\begin{split}
+N(y_1,y_2;w)
+&:=\#\{y_1<v\le y_2:v\ge2,\ P^-(v)\ge w\}\\
+&=\frac1{\log w'}\int_{\max(y_1,w')}^{y_2}
+\omega\left(\frac{\log t}{\log w'}\right)dt
++O\left(\frac{y_2}{\log^2w}\right).
+\end{split}
+\end{equation}
+The integral is defined to be zero when $y_2\le w'$.
+\end{lemma}
+
+\begin{proof}
+For integer $v$ the conditions $P^-(v)\ge w$ and $P^-(v)>w'$ coincide,
+so $N=\Phi(y_2,w')-\Phi(y_1,w')$. If $y_2\le w'$, this is zero.
+If $y_1\ge w'$, the two terms $-w'$ cancel exactly.
+If $y_1<w'<y_2$, then $\Phi(y_1,w')=1$, and we use
+Lemma~\ref{lem:rough-asymptotic} and $\omega(1)=1$.
+In both of the last two cases, with $y_a=\max(y_1,w')$,
+\[
+N(y_1,y_2;w)
+=\frac1{\log w'}
+\left[y\,\omega\left(\frac{\log y}{\log w'}\right)\right]_{y_a}^{y_2}
++O\left(\frac{y_2}{\log^2w}\right).
+\]
+Almost everywhere,
+\[
+\frac{d}{dy}\left(y\,\omega\left(\frac{\log y}{\log w'}\right)\right)
+=\omega(u)+\frac{\omega'(u)}{\log w'},
+\qquad u=\frac{\log y}{\log w'}.
+\]
+Now Lemma~\ref{lem:omega-envelope} proves \eqref{eq:rough-interval}.
+\end{proof}
+
+\subsection{Absolute mass and square mass}
+
+\begin{lemma}\label{lem:weight-norms}
+We have
+\begin{equation}\label{eq:rough-support}
+\#\{m\le X:P^-(m)\ge z\}
+\le1+\frac{10C_\pi X}{L}\sum_{j=0}^93^j\ll X/L,
+\end{equation}
+where $\pi(v)\le C_\pi v/\log v$ for $v\ge2$.
+Consequently,
+\begin{equation}\label{eq:weight-norms}
+\sum_{m\in I}|\lambda(m)|\ll X,
+\qquad \sum_{m\in I}|\lambda(m)|^2\ll XL.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For $1<m\le X$ with $P^-(m)\ge z$, write $m=np$ with $p=P^+(m)$.
+Then $\Omega(n)\le9$ and $X/n\ge z$, and the map $m\mapsto(n,p)$ is
+injective. The count is therefore at most
+\[
+1+\sum_{j=0}^9
+\sum_{\substack{n:\ \Omega(n)=j,\ P^-(n)\ge z\\ X/n\ge z}}
+\pi(X/n)
+\le1+\frac{10C_\pi X}{L}
+\sum_{j=0}^9\left(\sum_{z\le q\le X}\frac1q\right)^j.
+\]
+By (\ref{fact:PNT}), the inner sum is $\log10+O(1/L)\le3$.
+This proves \eqref{eq:rough-support}, and \eqref{eq:weight-sup} then
+gives \eqref{eq:weight-norms}.
+\end{proof}
+
+\subsection{The four loss regions}
+
+For $\mathcal F\in\{U_2,L_4,U_4,V_4\}$, let $k=2$ for $U_2$ and $k=4$
+otherwise. Let $\mathcal R_{\mathcal F}$ consist of its prime prefixes in
+Table~\ref{tab:families}, without $p_1^2\le m$.
+For a prefix put
+\[
+\Pi=P_k,\quad w=p_k,\quad x_i=\frac{\log p_i}{L},\quad
+s=\sum_{i=1}^k x_i=\frac{\log\Pi}{L},\quad
+e=x_k=\frac{\log w}{L}.
+\]
+Define
+\begin{equation}\label{eq:nonzero-tuples}
+\mathcal R_{\mathcal F}^*
+=\{(p_1,\ldots,p_k)\in\mathcal R_{\mathcal F}:4\Pi w\le X\}.
+\end{equation}
+Put $\delta=1/10$ and $s_j=x_1+\cdots+x_j$. The four regions are
+\begin{equation}\label{eq:loss-regions}
+\begin{aligned}
+\mathcal D_{U_2}
+&=\{\delta\le b<a<\tfrac9{20},\ a+b>\tfrac{11}{20},\ a+2b\le1\},\\
+\mathcal D_{L_4}
+&=\{\delta\le e<c<b<a,\ s_4<\tfrac9{20}\},\\
+\mathcal D_{U_4}
+&=\{\delta\le e<c<b<a,\ s_3<\tfrac9{20},\ s_4>\tfrac{11}{20}\},\\
+\mathcal D_{V_4}
+&=\{\delta\le e<c<b<a,\ a+b<\tfrac9{20},\\
+&\hspace{34mm}s_3>\tfrac{11}{20},\ s_4+e\le1\}.
+\end{aligned}
+\end{equation}
+Here $a,b,c,e$ are the ordered coordinates, and every tuple in
+\eqref{eq:nonzero-tuples} lies in its corresponding region. For
+\[
+u(x):=\frac{1-s}{e},
+\]
+the ranges are
+\begin{equation}\label{eq:buchstab-ranges}
+\begin{array}{c|cccc}
+\mathcal F&U_2&L_4&U_4&V_4\\ \hline
+u(x)&<9/2&44/9<u(x)<6&8/3<u(x)<9/2&<7/2.
+\end{array}
+\end{equation}
+For example, $s_4>4e$ and $e<9/80$ on $\mathcal D_{L_4}$.
+On $\mathcal D_{U_4}$ we have $s_4<9/20+e$ and $e<3/20$.
+These give the two lower bounds in \eqref{eq:buchstab-ranges}, and the
+remaining upper bounds follow from \eqref{eq:loss-regions}.
+
+\begin{lemma}\label{lem:loss-reduction}
+For each discarded family,
+\begin{equation}\label{eq:loss-reduction}
+\sum_{m\in I}(\log m)\mathcal F(m)
+\le\frac X8\sum_{\mathcal R_{\mathcal F}^{*}}
+\frac{\bar\omega(u_*)}{e\,\Pi}(1+o(1))+O(X/L),
+\end{equation}
+where
+\[
+u_*:=\max\left(1,
+\frac{\log(X/(8\Pi))}{\log(w-\frac12)}\right).
+\]
+All errors are uniform over the indicated tuples.
+\end{lemma}
+
+\begin{proof}
+For $U_2$ and $V_4$ we have $\Pi<A^2$, and for $L_4$ we have $\Pi<A$.
+For $U_4$, the inequalities $P_3<A$ and $p_4<P_3^{1/3}$ give
+$\Pi<A^{4/3}$.
+Thus $\Pi<X^{9/10}$ in every case, and for large $X$ the residual
+$v>X/(8\Pi)$ is at least $2$. By \eqref{eq:C1-automatic},
+\begin{equation}\label{eq:loss-exact-count}
+\sum_{m\in I}\mathcal F(m)
+=\sum_{\mathcal R_{\mathcal F}}
+N\left(\frac X{8\Pi},\frac X{4\Pi};w\right).
+\end{equation}
+If $4\Pi w>X$, a counted residual would satisfy
+$v\ge w>X/(4\Pi)$.
+Its count is therefore exactly zero, and we delete these tuples before
+making any estimate.
+
+For an actual tuple,
+\begin{equation}\label{eq:finite-buchstab-parameters}
+\frac{\log(X/(c\Pi))}{\log(w-1/2)}
+=u(x)-\frac{\log c}{eL}+O\left(\frac1{zL}\right)
+\qquad(c=4,8).
+\end{equation}
+By \eqref{eq:buchstab-ranges}, $X/(4\Pi)\le(w-1/2)^{10}$ for large $X$.
+Apply Lemma~\ref{lem:rough-interval} to the remaining tuples. The
+integration interval has length at most $X/(8\Pi)$, and
+Lemma~\ref{lem:omega-envelope} gives
+\[
+N\left(\frac X{8\Pi},\frac X{4\Pi};w\right)
+\le\frac1{\log(w-\frac12)}\cdot\frac X{8\Pi}\,
+\bar\omega(u_*)+O\left(\frac X{\Pi L^2}\right).
+\]
+The summed error is $O(X/L^2)$ by (\ref{fact:PNT}).
+Multiply by $\log m\le L$ on the nonnegative losses, and use
+$L/\log(w-1/2)=(1+o(1))/e$.
+\end{proof}
+
+\subsection{Rectangle majorants}
+
+Fix $n\ge1$ and $k\in\{2,4\}$. Put
+\[
+\mathfrak h:=\frac{9/20-1/10}{n}=\frac7{20n},\quad
+K=\prod_{i=1}^k[x_{i,0},x_{i,1}),\quad
+x_{i,0}=\frac1{10}+j_i\mathfrak h,\quad
+x_{i,1}=x_{i,0}+\mathfrak h,
+\]
+where $n>j_1\ge\cdots\ge j_k\ge0$.
+Every point of a loss region lies in exactly one such cell. Define
+\begin{equation}\label{eq:cell-majorant}
+u_0(K)=\frac{1-\sum_i x_{i,1}}{x_{k,1}},\qquad
+W(K)=\frac{\bar\omega(u_0(K))\mathfrak h^k}
+{x_{1,0}\cdots x_{k-1,0}x_{k,0}^2}.
+\end{equation}
+
+\begin{lemma}\label{lem:rectangle}
+For $x\in K$ with $s+e\le1$,
+\[
+\frac{\omega(u(x))}{x_1\cdots x_{k-1}e^2}
+\le
+\frac{\bar\omega(u_0(K))}
+{x_{1,0}\cdots x_{k-1,0}x_{k,0}^2}.
+\]
+\end{lemma}
+
+\begin{proof}
+Write $s'=x_1+\cdots+x_{k-1}$, so $u=(1-s')/e-1$.
+First raise $e$ to $x_{k,1}$. The value decreases, since
+$1-s'\ge2e>0$ at the starting point. Then raise the other coordinates to
+their upper endpoints; each has slope $-1/x_{k,1}$.
+Thus $u(x)\ge u_0(K)$, and also $u(x)\ge1$.
+Use the non-increasing envelope and the lower endpoints in the denominator.
+If $u_0(K)<1$, the envelope equals $1$, so the same bound holds.
+\end{proof}
+
+For $U_2$, take $n=256$ and retain cells satisfying
+\begin{equation}\label{eq:U2-cell-tests}
+a_0<9/20,\qquad a_1+b_1>11/20,\qquad a_0+2b_0\le1.
+\end{equation}
+For $V_4$, take $n=64$ and retain cells satisfying
+\begin{equation}\label{eq:V4-cell-tests}
+a_0+b_0<9/20,\qquad a_1+b_1+c_1>11/20,\qquad
+a_0+b_0+c_0+2e_0\le1.
+\end{equation}
+Write these cell sets as $\mathcal K_{U_2}$ and $\mathcal K_{V_4}$.
+Each exclusion removes only cells disjoint from the corresponding region.
+Define
+\begin{equation}\label{eq:cell-sums}
+\mathbf U_2=\sum_{K\in\mathcal K_{U_2}}W(K),\qquad
+\mathbf V_4=\sum_{K\in\mathcal K_{V_4}}W(K).
+\end{equation}
+The exact rational arithmetic in Appendix~\ref{app:certificate} gives
+\begin{equation}\label{eq:cell-certificates}
+\begin{gathered}
+|\mathcal K_{U_2}|=11093,\qquad
+\mathbf U_2\le\frac{732661466777}{10^{12}},\\
+|\mathcal K_{V_4}|=18286,\qquad
+\mathbf V_4\le\frac{98012508379}{10^{12}}.
+\end{gathered}
+\end{equation}
+
+\begin{proposition}\label{prop:rectangle-losses}
+We have
+\begin{equation}
+\sum_{m\in I}(\log m)U_2(m)\le(\mathbf U_2+o(1))\frac X8,
+\qquad
+\sum_{m\in I}(\log m)V_4(m)\le(\mathbf V_4+o(1))\frac X8.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Group the tuples in \eqref{eq:loss-reduction} by cell. By \eqref{eq:finite-buchstab-parameters} and Lemma~\ref{lem:rectangle},
+\[
+u_*\ge u_0(K)-\frac{10\log8}{L}-O\left(\frac1z\right).
+\]
+Uniform continuity of $\bar\omega$ gives
+$\bar\omega(u_*)\le\bar\omega(u_0(K))+o(1)$, and $1/e\le1/x_{k,0}$.
+For each coordinate, (\ref{fact:PNT}) gives
+\[
+\sum_{X^{x_0}\le p<X^{x_0+\mathfrak h}}\frac1p
+=\log\frac{x_0+\mathfrak h}{x_0}+O\left(\frac1L\right)
+\le\frac{\mathfrak h}{x_0}+O\left(\frac1L\right).
+\]
+Enlarge the sum to all prime tuples in the box product; every summand is
+nonnegative, including in diagonal cells. Each cell then contributes at
+most $W(K)+o(1)$. The number of cells is finite and independent of $X$,
+so summing proves the proposition.
+\end{proof}
+
+\subsection{The two volume bounds}
+
+\begin{lemma}\label{lem:volume-losses}
+We have
+\begin{equation}\label{eq:volume-losses}
+\begin{aligned}
+\sum_{m\in I}(\log m)L_4(m)
+&\le\left(\frac{71}{115200}+o(1)\right)\frac X8,\\
+\sum_{m\in I}(\log m)U_4(m)
+&\le\left(\frac{213}{12800}+o(1)\right)\frac X8.
+\end{aligned}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By \eqref{eq:buchstab-ranges} and \eqref{eq:finite-buchstab-parameters},
+$u_*>2$ for these two families. Hence $\bar\omega(u_*)=C_\omega$ and
+$1/e\le10$, and Lemma~\ref{lem:loss-reduction} gives the bound
+\[
+\sum_{m\in I}(\log m)\mathcal F(m)
+\le\frac X8\,C_\omega\,10
+\sum_{(p_i)\in\mathcal R_{\mathcal F}^{*}}
+\prod_{i=1}^4\frac1{p_i}(1+o(1))+O\left(\frac XL\right).
+\]
+Cover the fixed region by cubes of side $\sigma$ anchored at $1/10$.
+By (\ref{fact:PNT}), each cube contributes at most
+$10^4\sigma^4+O(1/L)$, and their total volume tends to
+$\vol(\mathcal D_{\mathcal F})$ as $\sigma\to0$.
+Letting first $X\to\infty$ and then $\sigma\to0$, we get
+\[
+\sum_{(p_i)\in\mathcal R_{\mathcal F}^{*}}\prod_i\frac1{p_i}
+\le10^4\operatorname{vol}(\mathcal D_{\mathcal F})+o(1).
+\]
+Use the gap coordinates
+\[
+e=\delta+y_4,\quad c=e+y_3,\quad b=c+y_2,\quad a=b+y_1.
+\]
+The Jacobian is $1$, with $y_1,y_2,y_3>0$ and $y_4\ge0$.
+For $L_4$ the condition is
+\[
+y_1+2y_2+3y_3+4y_4<\frac9{20}-4\delta=\frac1{20}=:y_L.
+\]
+Thus
+\begin{equation}\label{eq:L4-volume}
+\vol(\mathcal D_{L_4})=\frac{(1/20)^4}{576}.
+\end{equation}
+For $U_4$, put $Y=y_1+2y_2+3y_3$ and $x_U=3/20$; the two conditions
+become
+\[
+Y+3y_4<\frac3{20}=:x_U,
+\qquad
+Y+4y_4>\frac{11}{20}-4\delta=\frac3{20}=x_U.
+\]
+For $0<Y<x_U$ the $y_4$-interval has length $(x_U-Y)/12$, and the
+density in $Y$ is $Y^2/12$. Hence
+\begin{equation}\label{eq:U4-volume}
+\vol(\mathcal D_{U_4})
+=\int_0^{x_U}\frac{Y^2(x_U-Y)}{144}\,dY
+=\frac{(3/20)^4}{1728}.
+\end{equation}
+Multiplying these volumes by $C_\omega10^5$ gives
+$71/115200$ and $213/12800$, respectively.
+\end{proof}
+
+\subsection{The mass lower bound}
+
+\begin{proposition}\label{prop:mass}
+Put
+\begin{equation}\label{eq:ccert}
+\begin{split}
+\ccert
+&=1-\frac{732661466777}{10^{12}}-\frac{71}{115200}
+-\frac{213}{12800}-\frac{98012508379}{10^{12}}\\
+&=\frac{342155430899}{2250000000000}>\frac3{20}.
+\end{split}
+\end{equation}
+Then
+\begin{equation}\label{eq:mass-bound}
+F_\lambda\ge\left(\frac{\ccert}{8}-o(1)\right)X,
+\qquad |F_\lambda|\le\sum_{m\in I}|\lambda(m)|\ll X.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+By (\ref{fact:PNT}), the prime contribution is
+\[
+\theta(X/4)-\theta(X/8)
+=\frac X8+O\left(Xe^{-c\sqrt L}\right).
+\]
+Subtract the four nonnegative losses in \eqref{eq:rho-definition}, using
+Proposition~\ref{prop:rectangle-losses}, \eqref{eq:cell-certificates}
+and Lemma~\ref{lem:volume-losses}. This retains the exact weight $\log m$
+on primes, and on the losses the upper bound $\log m\le L$ has the
+required direction. The absolute bound follows from
+Lemma~\ref{lem:weight-norms}.
+\end{proof}
+
+\section{Duality}\label{sec:duality}
+
+For even $n$, put
+\begin{equation}
+r_\lambda(n):=\sum_{X_1<p\le X}(\log p)\,\lambda(n-p)
+=\int_0^1S(\alpha)S_\lambda(\alpha)e(-n\alpha)\,d\alpha
+=I_\M(n)+I_\m(n).
+\end{equation}
+
+Both integrals are real, since the arcs are invariant under
+$\alpha\mapsto-\alpha$ and the coefficients are real.
+If $n$ is not a sum of two primes, then
+\begin{equation}\label{eq:exceptional-sign}
+r_\lambda(n)\le0.
+\end{equation}
+This follows term by term from \eqref{eq:pointwise-minorant}.
+For $n\in(X/2,X]$ and $m\in I$ we also have
+\begin{equation}\label{eq:prime-location}
+n-m\in[X/4,7X/8]\subset(X_1,X].
+\end{equation}
+
+\begin{proposition}\label{prop:duality}
+Let $\mathcal E_X$ be the exceptional even integers in $(X/2,X]$.
+Suppose that $I_{\M}(n)\ge c_1X$ for every even $n$ in this interval,
+and that $\sup_{\alpha\in\m}|S_\lambda(\alpha)|\le\mathcal S$.
+Then
+\[
+|\mathcal E_X|\le c_1^{-2}\mathcal S^2L/X.
+\]
+\end{proposition}
+
+\begin{proof}
+Put $Z(\alpha)=\sum_{n\in\mathcal E_X}e(n\alpha)$.
+By \eqref{eq:exceptional-sign},
+\[
+c_1X\le I_{\M}(n)\le-I_{\m}(n)\qquad(n\in\mathcal E_X).
+\]
+Parseval gives $\|Z\|_2^2=|\mathcal E_X|$, and by (\ref{fact:PNT}),
+$\|S\|_2^2\le XL$ for large $X$. Squaring proves the assertion.
+\end{proof}
+
+\section{Minor arcs}\label{sec:minor}
+
+This section is unconditional. For intervals $J\subset I$ put
+\[
+T_\rho(\alpha;J)=\sum_{m\in J}\rho(m)e(m\alpha).
+\]
+We first bound these sums uniformly in $J$.
+
+\subsection{Rational approximation and bilinear estimates}
+
+For $\alpha\in\m$, Dirichlet's approximation theorem gives coprime $a,s$ with
+\begin{equation}\label{eq:minor-approximation}
+P<s\le Q_0,\qquad
+|\alpha-a/s|\le(sQ_0)^{-1}\le s^{-2}.
+\end{equation}
+A denominator $s\le P$ would place $\alpha$ on a major arc, since
+$(sQ_0)^{-1}\le P/(2sX)$. Thus
+\begin{equation}\label{eq:minor-sizes}
+X/s<X/P\le2X^{11/20+\eta},\qquad
+s\le3X/P\le6X^{11/20+\eta},\qquad D\le X/P.
+\end{equation}
+
+\begin{fact}\label{fact:reciprocal}
+\cite[Lemma~2.2]{C9} If $(a,s)=1$ and $|\alpha-a/s|\le s^{-2}$, then
+\begin{align*}
+\sum_{u\le U}\min\left(\frac{2X}{u},\frac1{2\|\alpha u\|}\right)
+&\ll (X/s+U+s)\log(2Xs),\\
+\sum_{h\le H}\min\left(Y,\frac1{\|\alpha h\|}\right)
+&\ll(1+H/s)(Y+s\log s).
+\end{align*}
+\end{fact}
+
+\begin{lemma}\label{lem:type-I-II}
+Let $|a_u|,|b_v|\le1$, and let $J\subset(0,X]$ be an interval.
+Then
+\begin{equation}\label{eq:type-I}
+\left|\sum_{u\le U}a_u\sum_{k:uk\in J}e(\alpha uk)\right|
+\ll(X/s+U+s)\log(2Xs).
+\end{equation}
+If $MN\ll X$, then
+\begin{equation}\label{eq:type-II}
+\left|\sum_{M<u\le2M}\sum_{v\le N}
+a_ub_v\ind_J(uv)e(\alpha uv)\right|
+\ll X^{1/2}(X/s+M+N+s)^{1/2}L^{1/2}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The inner sum in \eqref{eq:type-I} is a geometric progression with
+modulus at most $\min(2X/u,(2\|\alpha u\|)^{-1})$, so
+(\ref{fact:reciprocal}) applies.
+For \eqref{eq:type-II}, apply Cauchy--Schwarz in $u$. For fixed $v,v'$,
+the conditions $uv,uv'\in J$ restrict $u$ to an interval.
+Group the off-diagonal terms by $h=|v-v'|$; the second estimate in
+(\ref{fact:reciprocal}) gives
+\begin{align*}
+|T|^2
+&\ll MN\left(M+\sum_{1\le h<N}
+\min\left(2M,\frac1{\|\alpha h\|}\right)\right)\\
+&\ll MN\left(M+\left(1+\frac Ns\right)(M+s\log s)\right)\\
+&\ll MN\left(\frac{MN}s+M+N+s\right)L,
+\end{align*}
+where $T$ denotes the left side of \eqref{eq:type-II}.
+Since $MN\ll X$, this proves \eqref{eq:type-II}.
+\end{proof}
+
+By \eqref{eq:minor-sizes}, the estimates needed below are
+\begin{align}
+U\le X^{27/40}&:\quad \text{\eqref{eq:type-I}}\ll X^{27/40}L,
+\label{eq:type-I-size}\\
+M,N\ll X/P&:\quad \text{\eqref{eq:type-II}}
+\ll X^{31/40+\eta/2}L^{1/2}.
+\label{eq:type-II-size}
+\end{align}
+The first of these uses $11/20+\eta\le0.56<27/40$.
+
+\subsection{Exact separation of comparisons}
+
+Let $K=2\lceil X\rceil+1$, and let $H$ be the indicator of
+$\{0,\ldots,\lceil X\rceil\}$ modulo $K$.
+Fourier inversion gives, for integers $x\in[-X,X]$,
+\begin{equation}\label{eq:Fourier-comparison}
+\ind[x\ge0]=\sum_{g\bmod K}\widehat H(g)e(gx/K),
+\qquad \sum_g|\widehat H(g)|\le2+\log K\ll L,
+\end{equation}
+where $\widehat H(g)=K^{-1}\sum_{h=0}^{\lceil X\rceil}e(-gh/K)$.
+The norm bound follows from the geometric-sum bound
+$|\widehat H(g)|\le\min(1,(2K\|g/K\|)^{-1})$.
+Consequently, for $2\le u,v\le X$,
+\begin{equation}\label{eq:separate-roughness}
+\psi(v,P^-(u))
+=\sum_g\widehat H(g)e(gP^-(v)/K)e(-gP^-(u)/K).
+\end{equation}
+If $F(u)\in[0,X]$ is integer-valued, then
+\begin{equation}\label{eq:separate-cutoff}
+\ind[w\le F(u)]
+=\sum_g\widehat H(g)e(gF(u)/K)e(-gw/K)
+\qquad(1\le w\le X).
+\end{equation}
+These identities include equality at each endpoint, and each separated
+comparison costs $O(L)$.
+
+\subsection{The stopped Legendre identity}
+
+\begin{lemma}\label{lem:stopped-Legendre}
+Let $r<A$ be a positive integer, and let $k\ge1$. Then
+\begin{equation}\label{eq:stopped-Legendre}
+\begin{split}
+\psi(k,z)
+={}&\sum_{\substack{d\mid k,\ d\mid\Pi(z)\\rd<A}}\mu(d)\\
+&+\sum_{\substack{d\mid k,\ d\mid\Pi(z),\ d>1\\
+rd\ge A>rd/P^-(d)}}
+\mu(d)\psi(k/d,P^-(d)),
+\end{split}
+\end{equation}
+where $\Pi(z)=\prod_{p<z}p$.
+Every term in the second sum has $A\le rd<Az=D$.
+\end{lemma}
+
+\begin{proof}
+Iterate
+\[
+\psi(k',y)=1-\sum_{\substack{p<y\\p\mid k'}}\psi(k'/p,p).
+\]
+The selected primes decrease strictly, so their product $d$ is
+squarefree. Expand a node precisely when $rd<A$.
+At a stopped node, $q=P^-(d)<z$ and
+$rd/q<A\le rd<Aq<Az$.
+The terminal terms give \eqref{eq:stopped-Legendre}.
+The rule depends only on $r,d$, and no restriction is placed on repeated
+prime factors of the residual.
+\end{proof}
+
+\subsection{The eight retained families}
+
+\begin{proposition}\label{prop:minor-rho}
+Uniformly for $\alpha\in\m$ and intervals $J\subset I$,
+\begin{equation}
+|T_\rho(\alpha;J)|\ll X^{31/40+\eta/2}L^{7/2}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+We use the eight terms in \eqref{eq:rho-definition}; the four discarded
+families require no exponential-sum estimate.
+
+\noindent\textit{The families $R_0,R_1,R_2$.}
+For $j=0,1,2$ the sums have the form
+\begin{equation*}
+\sum_{m\in J}R_j(m)e(\alpha m)
+=\sum_r c_r\sum_{k:\ rk\in J}\psi(k,z)e(\alpha rk),
+\end{equation*}
+where $r=P_j<A$, with $r=1$ when $j=0$.
+Here $c_r\in\{0,1\}$ depends only on $r$, which is $z$-rough.
+Apply Lemma~\ref{lem:stopped-Legendre} and put $u=rd$. The rough and
+smooth parts of $u$ determine $r,d$ uniquely, so the resulting
+coefficients have modulus at most $1$. The free terms have $u<A$ and
+contribute
+$O(X^{11/20+\eta}L)$ by \eqref{eq:type-I}.
+The stopped terms are
+\[
+\sum_{A\le u<D}a'_u\sum_{k':\ uk'\in J}
+\psi(k',P^-(u))e(\alpha uk'),
+\qquad |a'_u|\le1,\quad P^-(u)=P^-(d).
+\]
+Here $k'>X/(8D)>2$. Split $u$ into $O(L)$ intervals $(M,2M]$ with
+$A/2\le M<D$; then $k'\le X/(4M)$.
+By \eqref{eq:separate-roughness} and \eqref{eq:type-II-size}, the total is
+$O(X^{31/40+\eta/2}L^{5/2})$.
+
+\noindent\textit{The family $R_3$.}
+Write $r=P_2=p_1p_2<A$ and $w=p_3$. The prime conditions are
+\[
+p_1>p_2>w\ge z,\qquad rw<A\ \text{or}\ rw>D.
+\]
+Apply Lemma~\ref{lem:stopped-Legendre} with anchor $r=P_2$ to the
+residual $\psi(k,z)$ in $m=rwk$; the anchor is not $P_3$.
+For free terms the outer variable is $U=rwd$. Its rough part determines
+$p_1,p_2,p_3$, and its smooth part determines $d$, so the coefficient is
+bounded by $1$. The inner variable is free on $J/U$.
+Since $w^2<p_2^2<r<A$,
+\[
+U=(rd)w<A^{3/2}=X^{27/40}.
+\]
+These terms contribute $O(X^{27/40}L)$, for both conditions on $rw$.
+
+For stopped terms, put $u=rd\in[A,D)$, $q=P^-(d)<z$, and $V=wk'$.
+Since $w\ge z>q$, we have $\psi(k',q)=\psi(V,q)$, and the sum becomes
+\begin{equation}\label{eq:R3-stopped}
+\sum_{A\le u<D}a_u\sum_{V:uV\in J}
+\psi(V,P^-(u))
+\sum_{\substack{w\mid V,\ w\in\PP,\ w\ge z}}
+\vartheta(u,w)e(\alpha uV).
+\end{equation}
+Here $|a_u|\le1$ includes the stopping condition, and the rough part of
+$u$ is $r=p_1p_2$. Also
+\[
+\vartheta(u,w)=\ind[w<p_2]
+\bigl(\ind[rw<A]+\ind[rw>D]\bigr).
+\]
+
+The correspondence is bijective, since $k'=V/w$ is determined by $u,V,w$;
+this remains true when $w^2\mid V$. Put
+\begin{align*}
+F_1(u)&=\min\bigl(p_2-1,\left\lceil A/r\right\rceil-1\bigr),\\
+F_2(u)&=p_2-1,\\
+F_3(u)&=\min(p_2-1,\lfloor D/r\rfloor).
+\end{align*}
+In $F_1$, $\lceil\cdot\rceil$ is the ceiling function, and $1$ is subtracted after rounding up.
+Set these to zero where $a_u=0$. All three are integers in $[0,X]$, and
+\begin{equation}\label{eq:R3-cutoffs}
+\vartheta(u,w)=\ind[w\le F_1(u)]+\ind[w\le F_2(u)]
+-\ind[w\le F_3(u)].
+\end{equation}
+Separate the roughness condition by \eqref{eq:separate-roughness} and
+each comparison by \eqref{eq:separate-cutoff}.
+For fixed $g,g',i$, the two coefficients are
+\[
+a_u e\Big(\frac{-gP^-(u)+g'F_i(u)}K\Big),\quad
+b_V(g,g'):=e\Big(\frac{gP^-(V)}K\Big)
+\sum_{\substack{w\mid V,\ w\text{ prime},\ w\ge z}}
+e\Big(\frac{-g'w}K\Big).
+\]
+Their moduli are at most $1$ and $5$, since $V\le X/(4A)<z^6$.
+With two Fourier norms and $O(L)$ dyadic intervals,
+\eqref{eq:type-II-size} now gives
+$O(X^{31/40+\eta/2}L^{7/2})$ for \eqref{eq:R3-stopped}.
+
+\noindent\textit{The families $B_1,B_2,B_3,B_4$.}
+Each has the form
+\[
+\sum_{m\in J}B_j(m)e(\alpha m)
+=\sum_{A\le u\le D}\ind_{E_j}(u)
+\sum_{v:\ uv\in J}\psi(v,P^-(u))e(\alpha uv).
+\]
+The ordered prime factorisation of $u$ determines the prefix conditions.
+For $B_1$, the condition $p_1^2\le m$ follows from $v\ge p_1$.
+The residual satisfies $v>X/(8D)>2$, and one Fourier separation with
+$O(L)$ dyadic intervals gives
+$O(X^{31/40+\eta/2}L^{5/2})$.
+
+All Type I outer variables are below $X^{27/40}$.
+Both variables in every Type II piece are $\ll D\le X/P$, and the
+underlying products place them in $[A/8,D]$ up to endpoint constants.
+Adding the eight estimates proves the proposition.
+\end{proof}
+
+\begin{corollary}\label{cor:minor-lambda}
+Uniformly for $\alpha\in\m$,
+\[
+\sup_{\alpha\in\m}|S_\lambda(\alpha)|
+\ll X^{31/40+\eta/2}L^{9/2}=X^{1-t/2}L^{9/2}.
+\]
+\end{corollary}
+
+\begin{proof}
+Partial summation gives
+\[
+S_\lambda(\alpha)=\log\frac X4\,T_\rho(\alpha;I)
+-\int_{X/8}^{X/4}T_\rho\big(\alpha;(X/8,y]\big)\frac{dy}y.
+\]
+Its modulus is at most $2L$ times the largest prefix sum, and
+Proposition~\ref{prop:minor-rho} applies.
+\end{proof}
+
+\section{Bilinear distribution with both maxima}\label{sec:bilinear}
+
+\begin{bilinearlemma}\label{lem:B}
+Let $X$ be large, $L=\log X$, $z=X^{1/10}$, and $1\le Q<X^{1/2}$.
+Let $M,N\ge1$. Suppose that $\alpha,\beta$ satisfy the following conditions.
+Their supports lie in $(M,2M]$ and $(N,2N]$, respectively, and consist
+of $z$-rough integers greater than $1$.
+Their coefficients have modulus at most $c_0$.
+For some $\mathcal A\ge1$, every $d\le L^{\mathcal A}$,
+$(b,d)=1$ and real $u$ satisfy
+\begin{equation}\label{eq:SW-hypothesis}
+\left|\sum_{\substack{n\le u\\n\equiv b\pmod d}}\beta_n
+-\frac1{\varphi(d)}\sum_{\substack{n\le u\\(n,d)=1}}\beta_n\right|
+\le C_{\mathrm{SW}}N L^{-\mathcal A}.
+\end{equation}
+Put $f=\alpha*\beta$. For $1\le\mathcal D\le\mathcal A$,
+\begin{equation}\label{eq:lemma-B}
+\begin{split}
+\sum_{q\le Q}\Delta_f(q)\ll{}&XL^{2\mathcal D+1-\mathcal A}
++X^{9/10}L^{\mathcal D+1}+XL^{2-\mathcal D}\\
+&+X^{19/20}L^3+QX^{1/2}L^2.
+\end{split}
+\end{equation}
+The implied constant depends only on $c_0,C_{\mathrm{SW}}$.
+In particular, for $Q\le Q_B$ and $B'>0$, take
+$\mathcal D=B'+2$ and $\mathcal A=3B'+5$.
+Then the left side is $O(XL^{-B'})$.
+\end{bilinearlemma}
+
+\begin{fact}\label{fact:Perron}
+\cite[Chapter~17]{Da} For $x>0$, $x\ne1$, $c>0$ and $T\ge1$,
+\[
+\left|\frac{1}{2\pi i}\int_{c-iT}^{c+iT}\frac{x^s}{s}\,ds
+-\ind[x>1]\right|
+\ll x^c\min\left(1,\frac{1}{T|\log x|}\right).
+\]
+\end{fact}
+
+\begin{fact}\label{fact:large-sieve}
+\cite[Theorem~7.13]{IK} If $c_n$ is supported on $N'$ consecutive integers,
+then
+\[
+\sum_{r\le R'}\frac r{\varphi(r)}
+\sum_{\chi\bmod r}^{*}
+\left|\sum_n c_n\chi(n)\right|^2
+\le (N'+R'^2)\sum_n|c_n|^2.
+\]
+The star restricts the sum to primitive characters.
+\end{fact}
+
+\begin{proof}[Proof of Lemma~\ref{lem:B}]
+We may assume that both sequences are nonzero and $MN<X$, since
+otherwise all prefix sums vanish. Roughness gives
+\begin{equation}\label{eq:B-support}
+z/2\le M,N\le2X/z=2X^{9/10},\qquad
+\|\alpha\|_2^2\le2c_0^2M,\quad\|\beta\|_2^2\le2c_0^2N.
+\end{equation}
+For $\ell\le X$ in the support, $\Omega(\ell)\le10$, hence
+$|f(\ell)|\le2^{10}c_0^2$. Write
+\[
+S_\chi(y;\alpha',\beta')=\sum_{mn\le y}\alpha'_m\beta'_n\chi(mn).
+\]
+\noindent\textit{Orthogonality and induction.}
+The principal character gives the exact coprime mean in $\Delta_f$.
+Therefore
+\begin{equation}\label{eq:B-orthogonality}
+\sum_{q\le Q}\Delta_f(q)
+\le\Sigma:=\sum_{q\le Q}\frac1{\varphi(q)}
+\sum_{\substack{\chi\bmod q\\\chi\ne\chi_0}}
+\max_{y\le X}|S_\chi(y;\alpha,\beta)|.
+\end{equation}
+Let $\chi$ be induced by a primitive character $\chi_1$ modulo $r$, and
+write $q=rk$. For all integers $\ell$,
+\[
+\chi(\ell)=\chi_1(\ell)\ind_{(\ell,k)=1}.
+\]
+No coprimality condition between $r,k$ is required. Put $\alpha^{(k)}_m=\alpha_m\ind_{(m,k)=1}$ and
+$\beta^{(k)}_n=\beta_n\ind_{(n,k)=1}$.
+The induction is a bijection onto the pairs with $r>1$, $rk\le Q$.
+Since $\varphi(rk)\ge\varphi(r)\varphi(k)$,
+\begin{equation}\label{eq:B-induction}
+\Sigma\le\sum_{k\le Q}\frac1{\varphi(k)}
+\sum_{1<r\le Q/k}\frac1{\varphi(r)}\sums_{\chi_1\bmod r}
+\max_{y\le X}|S_{\chi_1}(y;\alpha^{(k)},\beta^{(k)})|.
+\end{equation}
+We split this sum at $r=L^{\mathcal D}$.
+
+\noindent\textit{Small conductors.}
+Only here do we remove the restriction $(mn,k)=1$.
+Since $k\le Q<z^5$, at most four primes at least $z$ divide $k$, and for
+each such prime at most $X/z$ products $mn\le X$ occur.
+Thus, uniformly in all cutoffs,
+\[
+\left|S_{\chi_1}(y;\alpha^{(k)},\beta^{(k)})
+-S_{\chi_1}(y;\alpha,\beta)\right|
+\le4\cdot2^{10}c_0^2X/z.
+\]
+For $1<r\le L^{\mathcal D}$, expand $\beta$ by reduced residue classes.
+The primitive character is nonprincipal, so \eqref{eq:SW-hypothesis} gives
+\[
+\left|\sum_{n\le u}\beta_n\chi_1(n)\right|
+\le\varphi(r)C_{\mathrm{SW}}NL^{-\mathcal A}.
+\]
+Summing over $m$ gives $|S_{\chi_1}(y;\alpha,\beta)|
+\le2c_0C_{\mathrm{SW}}rXL^{-\mathcal A}$, and there are at most
+$\varphi(r)$ primitive characters. Using $\sum_{k\le Q}\varphi(k)^{-1}\ll L$, we obtain
+\begin{equation}\label{eq:B-small}
+\Sigma_{\mathrm{small}}
+\ll XL^{2\mathcal D+1-\mathcal A}+X^{9/10}L^{\mathcal D+1}.
+\end{equation}
+
+\noindent\textit{Perron's formula and the maximum in $y$.}
+Put $c=1/L$ and $T=X^3$. Every prefix can be represented with a
+half-integer $y=j+1/2$. The convolution is supported in $(MN,4MN]\subset[1,4X]$,
+and its absolute mass is at most $4c_0^2X$.
+For the relevant $\ell$, $|\log(y/\ell)|\ge1/(10X)$ and $(y/\ell)^c\le3$,
+so (\ref{fact:Perron}) gives a uniform error $O(X^{-1})$. Define
+\[
+A_k(s,\chi)=\sum_m\alpha_m^{(k)}\chi(m)m^{-s},\qquad
+B_k(s,\chi)=\sum_n\beta_n^{(k)}\chi(n)n^{-s}.
+\]
+Then
+\[
+\max_{y\le X}|S_\chi(y;\alpha^{(k)},\beta^{(k)})|
+\le\frac{3}{2\pi}\int_{-T}^T
+\frac{|A_kB_k(c+it,\chi)|}{|c+it|}\,dt+O(X^{-1}).
+\]
+Since $\int_{-T}^T|c+it|^{-1}dt\le8L$ for large $X$,
+any finite character family $\mathcal F$ satisfies
+\begin{equation}\label{eq:B-Perron}
+\sum_{\chi\in\mathcal F}\max_y|S_\chi(y)|
+\le4L\sup_{|t|\le T}\sum_{\chi\in\mathcal F}|A_kB_k(c+it,\chi)|
++O(|\mathcal F|/X).
+\end{equation}
+The same argument applies with positive character weights, and it keeps
+the maximum inside the sum over characters.
+
+\noindent\textit{Large conductors.}
+The intervals $(R_i,2R_i]$, where $R_i=2^iL^{\mathcal D}$, $i\ge0$,
+cover every conductor greater than $L^{\mathcal D}$.
+Fix $k$, one such interval, and $t$.
+Cauchy--Schwarz with weights $r/\varphi(r)$, followed by
+(\ref{fact:large-sieve}), gives
+\begin{align*}
+\sum_{R<r\le\min(2R,Q/k)}\frac1{\varphi(r)}
+\sum_{\chi_1\bmod r}^{*}|A_kB_k|
+&\le\frac1R\big((2M+4R^2)2c_0^2M\big)^{1/2}\\
+&\qquad\times\big((2N+4R^2)2c_0^2N\big)^{1/2}\\
+&\ll\Big(\frac{X^{1/2}}R+M^{1/2}+N^{1/2}+R\Big)X^{1/2}.
+\end{align*}
+The weighted Perron error is $O(R/X)$.
+Sum \eqref{eq:B-Perron} over $k$ and these intervals; the endpoint terms
+form geometric sums. Using \eqref{eq:B-support}, we get
+\begin{align}
+\Sigma_{\mathrm{large}}
+&\ll L^2\Big(XL^{-\mathcal D}
++LX^{1/2}(2X^{9/10})^{1/2}+QX^{1/2}\Big)\notag\\
+&\ll XL^{2-\mathcal D}+X^{19/20}L^3+QX^{1/2}L^2.
+\label{eq:B-large}
+\end{align}
+Equations~\eqref{eq:B-small} and \eqref{eq:B-large} prove \eqref{eq:lemma-B}.
+With the stated choices of $\mathcal D,\mathcal A$, both logarithmic terms
+are $XL^{-B'}$, and the remaining three terms have a fixed power saving.
+\end{proof}
+
+\subsection{Siegel--Walfisz estimates for prime boxes}
+
+\begin{fact}\label{fact:SW}
+\cite[Chapter~22]{Da} For every $\mathcal A>0$, there is $c_{\mathcal A}>0$
+such that
+\[
+\left|\pi(w;d,b)-\frac{\pi(w)}{\varphi(d)}\right|
+\ll_{\mathcal A}w\exp\big(-c_{\mathcal A}\sqrt{\log w}\big),
+\]
+uniformly for $(b,d)=1$ and $d\le(\log w)^{\mathcal A+1}$.
+\end{fact}
+
+\begin{primeboxlemma}\label{lem:C}
+Let $\mathcal A>0$.
+For $\beta=\ind_{\PP\cap[U,V)}$, where $z\le U<V\le4U$,
+the left side of \eqref{eq:SW-hypothesis} is
+$O_{\mathcal A}(Ue^{-c_{\mathcal A}\sqrt L})$,
+uniformly for $d\le L^{\mathcal A}$, $(b,d)=1$ and real $u$.
+
+Suppose $\beta_1$ satisfies \eqref{eq:SW-hypothesis} with scale $N_1$
+and constant $C_1$.
+If $\gamma$ is supported on $(N_2,2^jN_2]$ and $|\gamma|\le c$,
+then $\beta_1*\gamma$ satisfies it with scale $N_1N_2$
+and constant $C_1c2^{j+1}$.
+Restricting any such sequence to $(N',2N']$ multiplies its constant by at most $2$.
+\end{primeboxlemma}
+
+\begin{proof}
+For large $X$, $d\le L^{\mathcal A}<z$, so every prime in $[U,V)$ is coprime to $d$.
+Put $E(w)=\pi(w;d,b)-\pi(w)/\varphi(d)$.
+The discrepancy is zero for $u<U$. For $U\le u<V$ it equals
+$E(u)-E(U^-)$, and for $u\ge V$ it equals $E(V^-)-E(U^-)$; the left limits preserve
+both half-open endpoints. All arguments satisfy $\log w\ge L/10$, so for large $X$ we have
+$d\le(\log w)^{\mathcal A+1}$, and (\ref{fact:SW}) applies.
+
+For the convolution, fix $n_2$ in the support of $\gamma$.
+If $(n_2,d)>1$, neither the reduced residue sum nor its coprime mean contributes.
+Otherwise the residue for $n_1$ is $bn_2^{-1}\pmod d$, and we apply
+\eqref{eq:SW-hypothesis} at the cutoff $u/n_2$. The errors sum to at most
+\[
+C_1N_1L^{-\mathcal A}\sum_{n_2}|\gamma(n_2)|
+\le C_1c\,2^{j+1}N_1N_2L^{-\mathcal A}.
+\]
+The main terms give the coprime mean of the complete convolution.
+Finally, a dyadic restriction is the difference of two prefix sums.
+\end{proof}
+
+\section{Distribution of the signed weight}\label{sec:BV9}
+
+\begin{proposition}[Distribution of the signed weight]\label{prop:BV9}
+For every $B>0$,
+\begin{equation}\label{eq:BV9}
+\sum_{d\le Q_B}2^{\omega(d)}\Delta_\lambda(d)
+\ll_{B,\eta}XL^{-B},\qquad Q_B=X^{9/20-\eta}.
+\end{equation}
+Both maxima in \eqref{eq:Delta} remain inside the modulus sum.
+This estimate is unconditional.
+\end{proposition}
+
+\subsection{Marked prefixes on the full support}
+
+Extend each discarded family to all positive integers $m$. Use the
+prefix conditions in Table~\ref{tab:families}, including $p_1^2\le m$,
+and the residual $\psi(m/P_j,p_j)$. Write their sum as $\widetilde U$,
+and put
+\[
+\widetilde U^\flat(m):=\widetilde U(m)\ind_{m\le X/4}.
+\]
+On $I$ this equals the sum of the four losses. It is supported on $z$-rough integers with $\Omega(m)\le9$, and
+\begin{equation}\label{eq:Uflat-bound}
+0\le\widetilde U^\flat(m)\le\binom92+\binom94=162.
+\end{equation}
+For each four-prime prefix, the three possibilities $L_4,U_4,V_4$ are disjoint.
+
+Let $m=\ell_1\cdots\ell_r$ be squarefree, with
+$\ell_1>\cdots>\ell_r\ge z$.
+Put $t_i=\log\ell_i/L$ and $s=\sum_i t_i$.
+A marked prefix has residual roughness at its smallest selected prime.
+This holds precisely when that prime is $\ell_r$, also when the residual
+is $1$. Thus $\widetilde U(m)=G_r(t)$, where
+\begin{equation}\label{eq:marked-prefixes}
+\begin{split}
+G_r(t)={}&\sum_{i<r}
+\ind[t_i<9/20,\ t_i+t_r>11/20,\ 2t_i\le s]\\
+&+\sum_{i_1<i_2<i_3<r}
+\ind[t_{i_1}+t_{i_2}+t_{i_3}+t_r<9/20,\ 2t_{i_1}\le s]\\
+&+\sum_{i_1<i_2<i_3<r}
+\ind[t_{i_1}+t_{i_2}+t_{i_3}<9/20,\\
+&\hspace{24mm}t_{i_1}+t_{i_2}+t_{i_3}+t_r>11/20,\ 2t_{i_1}\le s]\\
+&+\sum_{i_1<i_2<i_3<r}
+\ind[t_{i_1}+t_{i_2}<9/20,
+t_{i_1}+t_{i_2}+t_{i_3}>11/20,\ 2t_{i_1}\le s].
+\end{split}
+\end{equation}
+In particular, $G_1=0$ and $\widetilde U(1)=0$.
+For $2\le r\le9$, let $\mathcal H_r$ consist of the hyperplanes
+\begin{equation}\label{eq:boundary-hyperplanes}
+\sum_{i\in J}t_i=9/20\ \text{or}\ 11/20\quad(1\le|J|\le4),
+\quad 2t_i=\sum_kt_k,\quad t_i=t_j\quad(i\ne j).
+\end{equation}
+These form a fixed finite rational arrangement. Off it, $G_r$ is constant
+in each component of the strictly ordered cone, and the bound $162$ holds
+there for $r\le9$.
+
+\subsection{Initial reductions and single primes}
+
+Partial summation and \eqref{eq:cutoffs} give
+\begin{equation}\label{eq:BV-reductions}
+\Delta_\lambda(d)\le2L\Delta_\rho(d),\qquad
+\Delta_\rho(d)\le
+\Delta_{\ind_\PP\ind_I}(d)+\Delta_{\widetilde U^\flat\ind_I}(d).
+\end{equation}
+We split $\widetilde U^\flat$ into squarefree and nonsquarefree parts
+and add the divisor weight last.
+
+\begin{fact}\label{fact:classical-BV}
+\cite[Chapter~28]{Da} For every $H>0$, some $K(H)>0$ satisfies
+\begin{equation}
+\sum_{d\le X^{1/2}L^{-K(H)}}
+\max_{(a,d)=1}\max_{y\le X}
+\left|\sum_{\substack{n\le y\\n\equiv a\pmod d}}\Lambda(n)
+-\frac{y}{\varphi(d)}\right|
+\ll_H XL^{-H}.
+\end{equation}
+\end{fact}
+
+Since $Q_B/(X^{1/2}L^{-K(H)})=X^{-1/20-\eta}L^{K(H)}\to0$,
+this covers all required moduli. Prime powers contribute
+$O(\sqrt X L)$ per modulus. Partial summation converts prime logarithmic
+sums to prime counts and retains the maximum in $y$. The modulus
+$1$ case controls the corresponding total prime count.
+Removing primes that divide $d$ costs $O(\omega(d)/\varphi(d))$, so the
+three conversions have total cost
+\[
+Q_BX^{1/2}L+\sum_{d\le Q_B}\frac{\omega(d)}{\varphi(d)}
+\ll X^{19/20-\eta}L.
+\]
+Consequently, for every $H>0$,
+\begin{equation}\label{eq:prime-BV}
+\sum_{d\le Q_B}\Delta_{\ind_\PP}(d)\ll_H XL^{-H}.
+\end{equation}
+Single primes are handled by this estimate; Lemma~\ref{lem:B} is not
+used for them.
+
+\subsection{Absolute-coordinate cubes}
+
+Fix $C_0>1$. Put
+\[
+\varpi:=\frac1{10N_\varpi},\qquad
+N_\varpi=\lceil L^{C_0}\rceil,\qquad
+\frac1{20}L^{-C_0}\le\varpi\le\frac1{10}L^{-C_0},
+\qquad 1/10\in\varpi\mathbb Z.
+\]
+For $2\le r\le9$, use cubes
+\begin{equation}\label{eq:cubes}
+C=\prod_{i=1}^r[a_i,a_i+\varpi),\qquad
+a_i\in\tfrac1{10}+\varpi\Z_{\ge0},\quad
+a_i<1,\quad a_1\ge\cdots\ge a_r.
+\end{equation}
+Let $\mathcal B_i(C)=\PP\cap[X^{a_i},X^{a_i+\varpi})$ and
+\[
+\conv_C:=\ind_{\mathcal B_1(C)}*\cdots*\ind_{\mathcal B_r(C)}.
+\]
+Every prime is at least $z$, the box ratio is
+$X^\varpi\le\exp(L^{1-C_0}/10)\le2$, and there are $O(L^{9C_0})$ cubes.
+An interior cube has closure disjoint from all hyperplanes in
+$\mathcal H_r$, and every other cube is a boundary cube.
+Only dimensions $2\le r\le9$ are used, since the discarded weight vanishes
+when $r\le1$.
+
+For an interior cube, the prime boxes are pairwise disjoint and ordered,
+so unique factorisation gives $\conv_C(m)\in\{0,1\}$. It is $1$ precisely for the squarefree integers with $\Omega(m)=r$ and $t(m)\in C$.
+Let $c_C\in[0,162]\cap\Z$ be the constant value of $G_r$ on $C$. Then,
+for every integer $m\ge1$,
+\begin{equation}\label{eq:interior-identity}
+\widetilde U^\flat(m)\ind_{\mathrm{sqf}}(m)\ind_{t(m)\in C}
+=c_C\conv_C(m)\ind_{m\le X/4}.
+\end{equation}
+The cutoff on the right is retained, and $c_C$ counts all admissible
+marked prefixes.
+
+\subsection{Distribution of each convolution}
+
+For any cube, including boundary cubes, split
+\[
+\mathrm{conv}_C=\alpha*\beta,\qquad
+\alpha=\ind_{\mathcal B_1(C)},\qquad
+\beta=\ind_{\mathcal B_2(C)}*\cdots*\ind_{\mathcal B_r(C)}.
+\]
+Both sequences are supported on rough integers greater than $1$, and
+their coefficients are bounded by $1$ and $(r-1)!\le8!$.
+Lemma~\ref{lem:C} supplies \eqref{eq:SW-hypothesis} at every fixed level.
+For $r=2$, use its prime-box assertion. For $r>2$, convolve one prime box
+with the other $r-2$ boxes; the latter convolution has coefficients at
+most $7!$ and bounded support ratio.
+All constants are uniform over the cubes.
+
+We specify the dyadic endpoints.
+Put $N_\star=\prod_{i=2}^rX^{a_i}$. The support of $\beta$ lies in
+$[N_\star,2^{r-1}N_\star)$, and we use the $r$ intervals
+\[
+(2^{j-1}N_\star,2^jN_\star],\qquad 0\le j\le r-1.
+\]
+They begin at $N_\star/2$, so no integer at $N_\star$ is omitted.
+Use two intervals anchored at $X^{a_1}/2$ for $\alpha$.
+Lemma~\ref{lem:C} controls each restriction, and changing to the dyadic
+scale costs at most a factor $2^9$.
+Lemma~\ref{lem:B} therefore gives, uniformly in $C$,
+\begin{equation}\label{eq:cube-BV}
+\sum_{d\le Q_B}\Delta_{\conv_C\ind_{[1,X/4]}}(d)
+\le\sum_{d\le Q_B}\Delta_{\conv_C}(d)\ll_{B'}XL^{-B'}.
+\end{equation}
+The distribution estimate is applied to the full product $m$ before
+truncation, and the modulus remains $d$ throughout.
+
+\subsection{Boundary cubes and positive transfer}
+
+Define
+\begin{gather*}
+\mathcal E(m):=\sum_{C\text{ boundary}}
+\widetilde U^\flat(m)\ind_{\mathrm{sqf}}(m)\ind_{t(m)\in C},\\
+W:=\sum_{C\text{ boundary}}\mathrm{conv}_C\ge0,
+\qquad W^\flat:=W\ind_{[1,X/4]}.
+\end{gather*}
+Then $W\ge0$ and $|\mathcal E|\le162W^\flat$. Every relevant sorted
+vector lies in exactly one cube. Hence
+\begin{equation}\label{eq:squarefree-decomposition}
+\widetilde U^\flat\ind_{\mathrm{sqf}}
+=\sum_{C\ \mathrm{interior}}c_C\conv_C\ind_{[1,X/4]}+\mathcal E.
+\end{equation}
+
+\begin{lemma}\label{lem:positive-transfer}
+If $|E|\le\mathcal CW$ and $W\ge0$, then
+\[
+\Delta_{E}(d)
+\le\mathcal C\Delta_W(d)
++\frac{2\mathcal C}{\varphi(d)}\sum_{m\le X}W(m).
+\]
+\end{lemma}
+
+\begin{proof}
+Bound each of the two terms defining the discrepancy of $E$ by its
+absolute value, and replace $|E|$ by $\mathcal CW$.
+The residue sum of $W$ is at most its coprime mean plus $\Delta_W(d)$,
+and the two means are each bounded by
+$\varphi(d)^{-1}\sum_{m\le X}W(m)$. These bounds are uniform in the
+residue and the cutoff.
+\end{proof}
+
+By \eqref{eq:cube-BV},
+\begin{equation}\label{eq:boundary-BV}
+\sum_{d\le Q_B}\Delta_{W^\flat}(d)
+\ll L^{9C_0}XL^{-B'}.
+\end{equation}
+This includes cubes meeting the diagonals. For a term with $r\le9$ prime
+boxes, split off one box as $\alpha$ and put the remaining $r-1$ boxes in
+$\beta$. The $\beta$ coefficients are at most $(r-1)!\le8!$, which is the
+bound used by Lemma~\ref{lem:B}. The full convolution can have coefficients
+up to $r!\le9!$. There are no one-dimensional boundary convolutions.
+
+\begin{lemma}\label{lem:boundary-mass}
+We have
+\[
+\sum_{m\le X}W(m)
+\ll\varpi LX+X/z
+\ll XL^{1-C_0}+X^{9/10}.
+\]
+\end{lemma}
+
+\begin{proof}
+A tuple in a boundary cube lies within distance $\varpi$, in the maximum norm,
+of some hyperplane $c\cdot t=c_0$ in \eqref{eq:boundary-hyperplanes}.
+Choose $i_0$ with $c_{i_0}\ne0$, and fix the other primes, whose product
+is $M'\le X/z$. The remaining prime lies in
+\[
+[T,Te^{\kappa\varpi L}]\cap[z,X/M']
+\]
+This interval contains $O(\varpi LX/M'+1)$ integers, and by
+(\ref{fact:PNT}),
+\[
+\sum_{\text{tuples}}\frac1{M'}\le\left(\sum_{z\le p\le X}\frac1p\right)^{r-1}\le3^8
+\]
+for large $X$.
+There are at most $(r-1)!\lfloor X/z\rfloor\le8!X/z$ labelled tuples
+with product at most $X/z$. The number of hyperplanes and dimensions is
+fixed, so summing proves the assertion.
+\end{proof}
+
+Using $\sum_{d\le Q_B}\varphi(d)^{-1}\ll L$, the last two lemmas give
+\begin{equation}\label{eq:squarefree-BV}
+\sum_{d\le Q_B}\Delta_{\widetilde U^\flat\ind_{\mathrm{sqf}}}(d)
+\ll L^{9C_0}XL^{-B'}+L(XL^{1-C_0}+X^{9/10}).
+\end{equation}
+
+\subsection{Repeated prime factors}
+
+The nonsquarefree part has modulus at most $162$, and it is supported on
+$p^2\mid m$ for some prime $p\ge z$. Fix $(a,d)=1$.
+If $p\mid d$, this divisibility is impossible in the reduced residue
+class. If $p\nmid d$, the Chinese remainder theorem gives
+\[
+\#\{m\le X:m\equiv a\pmod d,\ p^2\mid m\}
+\le X/(dp^2)+1.
+\]
+Summing over $z\le p\le\sqrt X$ gives $O(X/(dz)+\sqrt X)$, and the
+coprime-average term is $O(X/(\varphi(d)z))$. Therefore
+\begin{equation}\label{eq:nonsquarefree-BV}
+\sum_{d\le Q_B}\Delta_{\widetilde U^\flat\ind_{\mathrm{nsqf}}}(d)
+\ll XL/z+Q_B\sqrt X
+=X^{9/10}L+X^{19/20-\eta}.
+\end{equation}
+Repeated factors remain in the weight. This step counts multiples
+directly and needs no distribution estimate at modulus $dp^2$.
+
+\subsection{The divisor weight and the parameter choices}
+
+Since $|\lambda|\le256L$,
+\[
+\Delta_\lambda(d)\ll XL/\varphi(d)+L.
+\]
+The elementary divisor estimates
+\[
+\sum_{d\le Q}\frac{4^{\omega(d)}}{\varphi(d)}\ll L^4,
+\qquad
+\sum_{d\le Q}4^{\omega(d)}\ll QL^3
+\]
+give
+\begin{equation}\label{eq:four-omega}
+\sum_{d\le Q_B}4^{\omega(d)}\Delta_\lambda(d)\ll XL^5.
+\end{equation}
+To prove them, expand $4^{\omega(d)}$ over squarefree divisors and use
+$\varphi(ab)\ge\varphi(a)\varphi(b)$; the corresponding Euler products
+have logarithmic exponents $3$ and $4$. Cauchy--Schwarz yields
+\begin{equation}\label{eq:divisor-CS}
+\sum_{d\le Q_B}2^{\omega(d)}\Delta_\lambda(d)
+\le\left(\sum_{d\le Q_B}\Delta_\lambda(d)\right)^{1/2}
+\left(\sum_{d\le Q_B}4^{\omega(d)}\Delta_\lambda(d)\right)^{1/2}.
+\end{equation}
+
+\begin{proof}[Proof of Proposition~\ref{prop:BV9}]
+Given $B>0$, choose, in this order,
+\[
+H:=2B+8,\qquad C_0:=H+3,\qquad B':=H+9C_0+1,
+\]
+then $\mathcal D=B'+2$ and $\mathcal A=3B'+5$, and finally take $X$
+sufficiently large.
+Equations~\eqref{eq:prime-BV}, \eqref{eq:squarefree-BV},
+\eqref{eq:nonsquarefree-BV} and \eqref{eq:BV-reductions} give
+\[
+\sum_{d\le Q_B}\Delta_\rho(d)\ll XL^{-H},
+\qquad
+\sum_{d\le Q_B}\Delta_\lambda(d)\ll XL^{1-H}.
+\]
+Combining \eqref{eq:four-omega} and \eqref{eq:divisor-CS} gives
+$XL^{3-H/2}=XL^{-B-1}$, which proves \eqref{eq:BV9}.
+\end{proof}
+
+\section{Major arcs}\label{sec:major}
+
+Only this section uses $H_{7/8}$. We first prove the prime-side mean
+square. The argument follows \cite[Section~8]{Pi}, with the density exponents computed below.
+
+\subsection{Classical inputs}
+
+Let $N^*(\sigma,T,Q')$ count, with multiplicity, the zeros
+$\varrho=\beta+i\gamma$ satisfying $\beta\ge\sigma$ and $|\gamma|\le T$, summed over primitive
+characters of conductor at most $Q'$.
+
+\begin{fact}\label{fact:HB-one}
+\cite[Theorem~1, p.~231]{HB} For $11/14\le\sigma\le1$,
+\[
+N^*(\sigma,T,Q')\ll_\varepsilon(Q'^2T)^{2(1-\sigma)+\varepsilon}.
+\]
+
+\end{fact}
+
+\begin{fact}\label{fact:HB-twenty}
+\cite[Theorem~2(3), p.~232]{HB}; \cite[Lemma~4.17]{Pi}.
+Uniformly for $1/2\le\sigma\le1$,
+\[
+N^*(\sigma,T,Q')\ll_\varepsilon
+(Q'^2T^{6/5})^{(20/9)(1-\sigma)+\varepsilon}.
+\]
+
+\end{fact}
+
+\begin{fact}\label{fact:Montgomery}
+\cite[Theorem~12.2]{C2c}; \cite[Lemma~4.16]{Pi}.
+For $1/2\le\sigma\le1$,
+\[
+N^*(\sigma,T,Q')\ll
+(Q'^2T)^{3(1-\sigma)/(2-\sigma)}\log^9(Q'T).
+\]
+\end{fact}
+
+\begin{fact}\label{fact:Gallagher}
+\cite[Lemma~1]{C4}; \cite[Lemma~4.11]{Pi}.
+For a finite sequence $a_n$ and $\kappa>0$,
+\[
+\int_{-\kappa}^{\kappa}
+\left|\sum_n a_ne(n\beta)\right|^2d\beta
+\ll \kappa^2\int
+\left|\sum_{x<n\le x+1/(2\kappa)}a_n\right|^2dx.
+\]
+
+\end{fact}
+
+\begin{fact}\label{fact:Gauss}
+\cite[Section~3.4]{IK}; \cite[Chapter~9]{Da}.
+If $\chi\bmod q$ is induced by a primitive character of conductor $r$, then
+$|\tau(\chi)|^2\le r$. Also $\tau(\chi_{0,q})=\mu(q)$.
+\end{fact}
+
+\begin{fact}\label{fact:explicit}
+\cite[Chapters~15--19]{Da}; \cite[Lemma~4.15]{Pi}.
+The explicit formula for primitive Dirichlet characters has the uniform
+truncation error
+\[
+O\!\left(\frac{x\log^2(rxT)}{T}+x^{1/4}\log x\right).
+\]
+The number of zeros in a unit height interval is
+$O(\log(r(|T|+2)))$.
+\end{fact}
+
+\subsection{The prime-side mean square}
+
+On $\M(q,a)$, put
+\begin{equation}\label{eq:S1-definition}
+\mathcal T(\beta)=\sum_{X_1<k\le X}e(k\beta),\qquad
+S_1(a/q+\beta)=S(a/q+\beta)-\frac{\mu(q)}{\varphi(q)}\mathcal T(\beta).
+\end{equation}
+The arcs are disjoint, so this defines $S_1$ on $\M$.
+
+\begin{proposition}\label{prop:prime-mean-square}
+Assume $H_{7/8}$. Let $0<\eta\le1/100$, $0<\varepsilon_0\le\eta/10$
+and $X_1=X^{1-\varepsilon_0}$.
+Uniformly for $2\le P\le X^{9/20-\eta}$,
+\begin{equation}\label{eq:prime-mean-square}
+\int_\M|S_1(\alpha)|^2d\alpha
+\ll_\eta L^{18}X^{1-8\eta/9}+L^8P^2
+\ll_\eta L^{18}X^{1-8\eta/9}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Put $\vartheta=\log P/L$, $Q=X/P$ and $\epsilon=\eta/90$, and write
+$\varrho=1-\delta+i\gamma$.
+
+\noindent\textit{Character expansion.}
+Every prime in $S$ is coprime to $q\le P$, since $P<\sqrt X<X_1$.
+For the character $\chi^*$ inducing $\chi\bmod q$,
+\[
+S(a/q+\beta)=\frac1{\varphi(q)}\sum_{\chi\bmod q}
+\chi(a)\tau(\bar\chi)
+\sum_{X_1<p\le X}\chi^*(p)\log p\,e(\beta p).
+\]
+There is one exterior factor $1/\varphi(q)$. For primitive $\chi\bmod r$, put
+\[
+\begin{aligned}
+S_1(\chi^*,\beta)&=\sum_n a_n(\chi^*)e(n\beta),\\
+a_n(\chi^*)&=\ind_{X_1<n\le X}
+\bigl(\ind_{\PP}(n)\chi^*(n)\log n-E(\chi^*)\bigr),\\
+E(\chi^*)&=\ind[r=1].
+\end{aligned}
+\]
+
+Orthogonality in $a$, followed by (\ref{fact:Gauss}), gives
+\begin{equation}\label{eq:character-mean-square}
+\begin{gathered}
+\int_\M|S_1|^2\ll L^2\sum_{r\le P}\;\sums_{\chi\bmod r}W_1(\chi)^2,
+\\
+W_1(\chi)^2=\int_{|\beta|\le1/(rQ)}
+\left|\sum_na_n(\chi)e(n\beta)\right|^2d\beta.
+\end{gathered}
+\end{equation}
+Here we used
+\[
+\sum_{\substack{q\le P\\r\mid q}}\frac1{\varphi(q)}
+\le \frac1{\varphi(r)}\sum_{l\le P/r}\frac1{\varphi(l)}
+\ll \frac L{\varphi(r)},
+\qquad \frac r{\varphi(r)}\ll L.
+\]
+This includes all moduli $q\le P$.
+
+\noindent\textit{Short intervals.}
+Apply (\ref{fact:Gallagher}) with $Y=rQ/2\le X/2$, and let
+$X_2=\max(X_1,6Y)$. Then
+\begin{equation}\label{eq:Gallagher-ranges}
+W_1(\chi)^2\ll\int_{X_1-Y}^X
+\left|Y^{-1}\sum_{x<n\le x+Y}a_n(\chi)\right|^2dx
+=I_1+I_2+I_3.
+\end{equation}
+With empty intervals omitted, the three ranges are
+\[
+I_1=[X_1-Y,\min(X_2,X-Y)],\qquad
+I_2=[X_2,X-Y],\qquad
+I_3=[X-Y,X].
+\]
+The first has length at most $7Y$.
+
+\noindent\textit{The explicit formula.}
+Put $T_0=3\sqrt X$ and $\Lambda_\PP(n)=\ind_\PP(n)\log n$. By (\ref{fact:explicit}), uniformly for $X_1/2\le u_1<u_2\le9X$,
+\begin{equation}\label{eq:explicit-difference}
+\sum_{u_1<n\le u_2}\bigl(\chi(n)\Lambda_\PP(n)-E(\chi)\bigr)
+=-\sum_{\substack{\varrho:\ \beta\ge1/2\\|\gamma|\le T_0}}
+\frac{u_2^\varrho-u_1^\varrho}{\varrho}
++O(\sqrt X L^2).
+\end{equation}
+Here prime powers cost $O(\sqrt XL)$, the zeros with $\beta<1/2$ cost
+$O(\sqrt XL^2)$, and the truncation costs $O(XL^2/T_0+X^{1/4}L)$.
+The pole cancels the term $E(\chi)$ up to $O(1)$. Constant terms cancel
+in the difference, and their logarithmic terms cost $O(L)$.
+Hypothesis $H_{7/8}$ and the functional equation keep all nontrivial zeros
+in $1/8\le\beta\le7/8$, so every zero retained in \eqref{eq:explicit-difference} has
+\begin{equation}\label{eq:delta-range}
+1/8\le\delta\le1/2.
+\end{equation}
+The squared error in the two end ranges contributes at most
+\[
+\sum_{r\le P}rY^{-1}XL^4\ll L^4P^2.
+\]
+
+The middle-range error is treated below.
+
+\noindent\textit{Classes of zeros.}
+Partition conductors into intervals $R<r\le2R$ with dyadic $R$,
+including the initial interval $R=1/2$ to cover $r=1$. For $\mathcal M=2^\mu$, $\mu\ge0$, use the height intervals
+\[
+(\mathcal M-1)P/R\le |\gamma|\le(2\mathcal M-1)P/R.
+\]
+
+Shared endpoints are assigned once.
+Also use $h-1/L<\delta\le h$, with $h\in L^{-1}\Z$.
+There are $O(L^3)$ classes, and $O(L^2)$ for each character. By \eqref{eq:delta-range}, only $1/8\le h\le1/2+1/L$ occur.
+Within a class,
+\[
+X^{-\delta}\le eX^{-h},\qquad {X_1}^{-\delta}\le e\,{X_1}^{-h},
+\qquad |\gamma|\le T_{\mathcal M}:=2\mathcal MP/R,
+\qquad T_{\mathcal M}\ge2.
+\]
+For one character the class contains $O((\mathcal MP/R)L)$ zeros, and
+over all characters it contains at most
+$N^*(\sigma_h,T_{\mathcal M},2R)$, where
+\begin{equation}\label{eq:class-K}
+\sigma_h=\max(1-h,1/2),\qquad
+\mathcal K(R,\mathcal M,h)
+=\mathcal M^{-1}N^*(\sigma_h,2\mathcal MP/R,2R)\,{X_1}^{-2h}.
+\end{equation}
+For the terminal classes $h>1/2$, the value $\sigma_h=1/2$ is valid
+because \eqref{eq:explicit-difference} already restricts to $\beta\ge1/2$.
+We also have
+\begin{equation}\label{eq:height-decay}
+\min\left(1,\frac{2P}{r|\gamma|}\right)\le\frac4{\mathcal M}.
+\end{equation}
+
+\noindent\textit{The upper end range.}
+For $x\in[X-Y,X]$, the zero term is bounded by
+\[
+\left|\frac{X^{\varrho}-x^{\varrho}}{Y\varrho}\right|
+\le\min\left(x^{-\delta},\frac{2X^{1-\delta}}{Y|\gamma|}\right)
+\ll X^{-\delta}\min\left(1,\frac{2P}{r|\gamma|}\right)
+\ll\frac{X^{-h}}{\mathcal M}.
+\]
+Apply Cauchy--Schwarz first to the classes for one character and then
+to the zeros in one class. For fixed $R,\mathcal M,h$, its contribution after summing characters is
+\begin{multline*}
+L^2\cdot RQ\cdot\frac{X^{-2h}}{\mathcal M^2}
+\cdot\frac{\mathcal MP}{R}L\cdot
+N^*(\sigma_h,T_{\mathcal M},2R)\\
+=L^3X\mathcal M^{-1}N^*(\sigma_h,T_{\mathcal M},2R)X^{-2h}
+\le L^4X\mathcal K(R,\mathcal M,h).
+\end{multline*}
+Summing all classes gives $O(L^7X\max\mathcal K)$.
+
+\noindent\textit{The lower end range.}
+Here the window is $(\max(x,X_1),x+Y]$, and its zero term is at most
+\begin{multline*}
+\left|
+\frac{(x+Y)^{\varrho}-\max(x,X_1)^{\varrho}}{Y\varrho}
+\right|
+\le\min\left({X_1}^{-\delta},\frac{2X^{1-\delta}}{Y|\gamma|}\right)\\
+\le {X_1}^{-\delta}\min\left(1,\frac{2X}{Y|\gamma|}\right)
+\ll\frac{{X_1}^{-h}}{\mathcal M}.
+\end{multline*}
+Here ${X_1}^{-\delta}$ is a power of $X_1=X^{1-\varepsilon_0}$ with exponent $-\delta$.
+The numerator $2X^{1-\delta}$ is a power of $X$ itself, with exponent $1-\delta$.
+
+The same calculation gives $O(L^7X\max\mathcal K)$. This range requires
+the factor ${X_1}^{-2h}$ in place of $X^{-2h}$.
+
+\noindent\textit{The middle range.}
+Partition it at $x_j=2^jX_2$, using
+$x_j,\min(2x_j,X-Y)$. The final interval is truncated at $X-Y$, and
+every window remains inside $X_1,X$. Write
+\[
+f(u)=\sum_{n\le u}\bigl(\chi(n)\Lambda_\PP(n)-E(\chi)\bigr).
+\]
+For $x\ge X_2\ge6Y$, the following estimate also bounds a truncated interval:
+\begin{equation}\label{eq:relative-shift}
+\int_x^{2x}\left|\frac{f(u+Y)-f(u)}Y\right|^2du
+\le\frac{30}{Y^2}
+\max_{Y/(3x)\le\theta'\le3Y/x}
+\int_x^{3x}|f(u+\theta'u)-f(u)|^2du.
+\end{equation}
+To prove it, for $2Y\le v\le3Y$ write
+\[
+g(u)=f(u+Y)-f(u)
+=\bigl[f(u+v)-f(u)\bigr]
+-\bigl[f((u+Y)+(v-Y))-f(u+Y)\bigr].
+\]
+Average over $v$ and use Cauchy--Schwarz.
+In the first bracket substitute $\theta'=v/u$; its contribution is at most
+$(2/Y)(2x)(3Y/x)=12$ times the maximum integral.
+In the second substitute $\theta'=(v-Y)/(u+Y)$; its contribution is at
+most $(2/Y)(3x)(3Y/x)=18$ times that maximum.
+The common range is $Y/(3x),3Y/x$, and division by $Y^2$ proves
+\eqref{eq:relative-shift}.
+
+Here $\theta'\le1$, and by \eqref{eq:explicit-difference} the zero
+coefficient is
+\begin{gather*}
+f(u+\theta'u)-f(u)
+=-\sum_{\varrho}c_{\varrho}u^{\varrho}+O(\sqrt X L^2),\\
+c_{\varrho}=\frac{(1+\theta')^{\varrho}-1}{\varrho},
+\qquad |c_{\varrho}|\le\min\left(\theta',\frac3{|\varrho|}\right).
+\end{gather*}
+Also
+\[
+\left|\int_x^{3x}u^{\varrho+\bar\varrho'}\,du\right|
+\ll\frac{x^{3-\delta-\delta'}}{1+|\gamma-\gamma'|}.
+\]
+
+The unit-interval zero count in (\ref{fact:explicit}) gives
+$\sum_{\varrho'}(1+|\gamma-\gamma'|)^{-1}\ll L^2$ for one character.
+The arithmetic-geometric mean inequality in each pair yields
+\begin{align*}
+\frac1{Y^2}\int_x^{3x}\left|\sum_\varrho c_\varrho u^\varrho\right|^2du
+&\ll\frac{L^2}{Y^2}\sum_\varrho
+x^{3-2\delta}\min(\theta',3/|\varrho|)^2\\
+&\ll\frac{L^2}{Y}\sum_\varrho
+x^{2-2\delta}\min(\theta',3/|\varrho|).
+\end{align*}
+Each zero contributes at most
+\[
+L^2x^{1-2\delta}\min\left(1,\frac{x}{Y|\gamma|}\right)
+\ll L^2\frac{X^{1-2h}}{\mathcal M}.
+\]
+Here $X^{1-2h}=X\cdot X^{-2h}$ is a power of $X$ itself.
+Since $X_1<X$, the factor $X^{-2h}$ is at most the separate class factor ${X_1}^{-2h}$ in \eqref{eq:class-K}.
+We used $1-2\delta\ge0$ and $Y\ge RX/(2P)$.
+Summing the class counts and the $O(L)$ intervals gives the total zero
+contribution $O(L^6X\max\mathcal K)$. The error in \eqref{eq:explicit-difference} contributes, per interval,
+$O(X^2L^4/Y^2)$, and after the interval and character sums it is
+\[
+\sum_{r\le P}r\cdot\frac{X^2L^5}{Y^2}
+\ll\sum_{r\le P}r\cdot
+\frac{X^2L^5}{(rX/(2P))^2}
+\ll L^6P^2.
+\]
+Combining the three ranges gives
+\begin{equation}\label{eq:W-class-bound}
+\sum_{r\le P}\;\sums_{\chi\bmod r}W_1(\chi)^2
+\ll L^7X\max\mathcal K+L^6P^2.
+\end{equation}
+
+\noindent\textit{Density estimates for the classes.}
+Recall $\vartheta\le9/20-\eta$, $\epsilon=\eta/90$ and
+$\varepsilon_0\le\eta/10$.
+First suppose $1/8\le h\le3/14$, and use (\ref{fact:HB-one}) with
+$Q'=2R$ and $T=2\mathcal MP/R$. Then $Q'^2T\le8P^2\mathcal M$, and the
+exponent $2h+\epsilon-1$ of $\mathcal M$ is negative. Thus $\mathcal K\ll X^{-s_3(h)}$, where
+\begin{equation}\label{eq:density-s3}
+\begin{split}
+s_3(h)&=2h(1-\varepsilon_0-2\vartheta)-2\vartheta\epsilon\\
+&\ge\frac14\Bigl(\frac1{10}+2\eta-\varepsilon_0\Bigr)
+-\frac9{10}\epsilon
+\ge\tfrac1{40}+\tfrac{93}{200}\eta\ge\tfrac1{40}.
+\end{split}
+\end{equation}
+The exact positivity condition is
+$1-\varepsilon_0-2\vartheta>\vartheta\epsilon/h$, and at $h=1/8$ its
+right side is $8\vartheta\epsilon$.
+
+Next suppose $3/14\le h\le3/8-\epsilon$, and use (\ref{fact:HB-twenty}).
+Here
+\[
+Q'^2T^{6/5}=4\cdot2^{6/5}R^{4/5}(\mathcal MP)^{6/5}
+\le10P^2\mathcal M^{6/5}.
+\]
+The exponent of $\mathcal M$ is
+$(8/3)h+(6/5)\epsilon-1\le-22\epsilon/15<0$.
+Consequently $\mathcal K\ll_\epsilon X^{-s_2(h)}$, with
+\begin{equation}\label{eq:density-s2}
+\begin{split}
+s_2(h)&=2h\Bigl(1-\varepsilon_0-\frac{20}9\vartheta\Bigr)
+-2\vartheta\epsilon\\
+&\ge\Bigl(\frac37\frac{191}{90}-\frac1{100}\Bigr)\eta\\
+&\ge\frac89\eta.
+\end{split}
+\end{equation}
+The required margin is
+\begin{equation}\label{eq:critical-density-margin}
+1-\varepsilon_0-(20/9)\vartheta\ge191\eta/90>0.
+\end{equation}
+
+For $3/8-\epsilon\le h\le1/2$, use (\ref{fact:Montgomery}). The
+exponent $3h/(1+h)-1$ of $\mathcal M$ is nonpositive, and we obtain $\mathcal K\ll L^9X^{-s_1(h)}$, where
+\begin{equation}\label{eq:density-s1}
+\begin{split}
+s_1(h)&=\frac{2h}{1+h}
+\Bigl(1+h-3\vartheta-\varepsilon_0(1+h)\Bigr)\\
+&\ge\frac{2h}{1+h}
+\Bigl(\frac1{40}+3\eta-\epsilon-\frac32\varepsilon_0\Bigr)
+\ge\frac1{75}.
+\end{split}
+\end{equation}
+The threshold $\vartheta<11/24$ has margin $1/120+\eta$.
+
+Finally, if $1/2<h\le1/2+1/L$, then $\sigma_h=1/2$, and the elementary
+zero count gives
+\[
+N^*(1/2,T,Q')\le N^*(0,T,Q')\ll Q'^2TL=8R\mathcal MP L.
+\]
+Since $2h>1$,
+\[
+\mathcal K\ll\mathcal M^{-1}\cdot8R\mathcal MP L^9\cdot {X_1}^{-1}
+\le8L^9P^2X^{-(1-\varepsilon_0)}\ll L^9X^{-1/10}.
+\]
+All classes have now been covered. For $\eta\le1/100$,
+\begin{equation}\label{eq:maximum-K}
+\max\mathcal K\ll_\eta L^9X^{-c(\eta)},\qquad
+c(\eta)=\min\bigl(\tfrac1{40},\tfrac89\eta,\tfrac1{75},\tfrac1{10}\bigr)
+=\frac89\eta.
+\end{equation}
+Equations~\eqref{eq:character-mean-square}, \eqref{eq:W-class-bound}
+and \eqref{eq:maximum-K} prove \eqref{eq:prime-mean-square}.
+The term $L^8P^2$ is absorbed because $P^2\le X^{9/10-2\eta}$.
+\end{proof}
+
+\subsection{A variant without the first density estimate}
+
+One may omit (\ref{fact:HB-one}) and use (\ref{fact:HB-twenty})
+throughout $1/8\le h\le3/8-\epsilon$.
+The minimum in \eqref{eq:density-s2} is then at $h=1/8$, giving
+\[
+s_2\ge\frac14\cdot\frac{191}{90}\eta-\frac{\eta}{100}
+=0.5206\ldots\eta\ge\frac\eta2.
+\]
+The mean-square saving is $\eta/2$ in place of $8\eta/9$, and the mixed
+error below becomes $X^{1-\eta/4}L^{19/2}$. All other steps are unchanged.
+
+\subsection{The discrete pole and its kernel}
+
+Parseval and Lemma~\ref{lem:weight-norms}, together with
+Proposition~\ref{prop:prime-mean-square}, give
+\begin{equation}\label{eq:S1-removal}
+\left|\int_\M S_1(\alpha)S_\lambda(\alpha)e(-n\alpha)\,d\alpha\right|
+\ll X^{1-4\eta/9}L^{19/2}.
+\end{equation}
+Put $V(\beta)=\int_{X_1}^Xe(\beta u)\,du$.
+
+\begin{fact}\label{fact:Euler-Maclaurin}
+\cite[Lemma~2.8]{C9} Euler--Maclaurin summation gives
+$|\mathcal T(\beta)-V(\beta)|\ll1+X|\beta|$.
+\end{fact}
+
+On $\M(q,a)$ this is $O(1+P/q)$. Therefore
+\[
+\int_\M\left|\frac{\mu(q)}{\varphi(q)}(\mathcal T-V)\right|^2
+\ll\sum_{q\le P}\frac1{\varphi(q)}\cdot\frac{P}{qX}
+\left(1+\frac Pq\right)^2
+\ll\frac{P^3}{X}.
+\]
+Its mixed contribution with $S_\lambda$ is
+\begin{equation}\label{eq:pole-discretization}
+O(P^{3/2}L^{1/2}).
+\end{equation}
+Let $B_q=P/(qX)$ and $\Si(t)=\int_0^t(\sin u)/u\,du$. The remaining
+pole term is
+\begin{align}
+R_{\mathrm{pole}}(n)
+&=\sum_{q\le P}\frac{\mu(q)}{\varphi(q)}
+\sum_{m\in I}\lambda(m)c_q(n-m)K_q(n-m),\label{eq:pole-term}\\
+K_q(v)&=\frac1\pi\Bigl[\Si\bigl(2\pi B_q(X-v)\bigr)
++\Si\bigl(2\pi B_q(v-X_1)\bigr)\Bigr].
+\label{eq:kernel}
+\end{align}
+This follows by integrating $V(\beta)e(-\beta v)$ over $[-B_q,B_q]$.
+By \eqref{eq:prime-location}, both arguments have positive gaps at least
+$X/8$. Here, since $\varepsilon_0>0$ is fixed and $X_1/X=X^{-\varepsilon_0}\to0$,
+we have $X_1\le X/8$ for all sufficiently large $X$.
+Differentiating \eqref{eq:kernel} gives
+\begin{equation}\label{eq:kernel-derivative}
+K_q'(v)=\frac1\pi\left(
+\frac{\sin\bigl(2\pi B_q(v-X_1)\bigr)}{v-X_1}
+-\frac{\sin\bigl(2\pi B_q(X-v)\bigr)}{X-v}
+\right).
+\end{equation}
+On $[X/4,7X/8]$, each of $X-v$ and $v-X_1$ ranges within
+$[X/8,7X/8]$. Hence
+\[
+\operatorname{Var}_{[X/4,7X/8]}K_q
+=\int_{X/4}^{7X/8}|K_q'(v)|\,dv
+\le\frac{2\log 7}{\pi}<2.
+\]
+The elementary estimates
+$|\Si(t)-\pi/2|\le2/t$ and $\sup_{t\ge0}\Si(t)<1.86$ give
+\begin{equation}\label{eq:kernel-bounds}
+K_q(v)=1+O(q/P),\qquad \|K_q\|_\infty\le1.19,
+\qquad \operatorname{Var}_{[X/4,7X/8]}K_q<2.
+\end{equation}
+We keep $K_q$ until the residue-class calculation is done.
+
+\subsection{Reduced residue classes}
+
+Only squarefree moduli contribute to \eqref{eq:pole-term}. All
+non-squarefree arcs are already included in \eqref{eq:S1-removal}, since
+there $\mu(q)=0$ and $S_1=S$. In the rest of the pole calculation, $q$ is
+squarefree.
+
+For $(r,q)=1$, partial summation and \eqref{eq:kernel-bounds} give
+\begin{equation}\label{eq:kernel-distribution}
+\begin{split}
+\sum_{\substack{m\in I\\m\equiv r\pmod q}}\lambda(m)K_q(n-m)
+={}&\frac1{\varphi(q)}
+\sum_{\substack{m\in I\\(m,q)=1}}\lambda(m)K_q(n-m)\\
+&+O(7\Delta_\lambda(q)).
+\end{split}
+\end{equation}
+The bounded variation keeps a factor $P/q$ out of this estimate.
+For squarefree $q$, multiplicativity gives
+\begin{equation}\label{eq:Ramanujan-identities}
+\begin{split}
+\sum_{(r,q)=1}c_q(n-r)&=\mu(q)c_q(n),\\
+\sum_{(r,q)=1}|c_q(n-r)|
+&\le\sum_{r\bmod q}|c_q(n-r)|=2^{\omega(q)}\varphi(q).
+\end{split}
+\end{equation}
+For a prime $p$, use $c_p(n)=p-1$ when $p\mid n$, and $c_p(n)=-1$
+otherwise; the Chinese remainder theorem gives the product identities.
+Consequently, the coprime part of \eqref{eq:pole-term} is
+\begin{equation}\label{eq:coprime-pole}
+\sum_{q\le P}\frac{\mu^2(q)c_q(n)}{\varphi(q)^2}
+\sum_{\substack{m\in I\\(m,q)=1}}\lambda(m)K_q(n-m)
++O\left(\sum_{q\le Q_B}2^{\omega(q)}\Delta_\lambda(q)\right).
+\end{equation}
+Proposition~\ref{prop:BV9} bounds the error by $O(XL^{-B})$, since it
+applies to this same weight, with both maxima, at level $Q_B\ge P$.
+
+\subsection{Non-coprime classes}
+
+The non-coprime part satisfies
+\begin{equation}\label{eq:noncoprime-absolute}
+|R_{\mathrm{nc}}(n)|
+\le\sum_{q\le P}\frac{\mu^2(q)}{\varphi(q)}
+\sum_{\substack{m\in I\\(m,q)>1}}
+|\lambda(m)c_q(n-m)K_q(n-m)|.
+\end{equation}
+If a summand is nonzero, some prime $\ell\ge z$ divides both $m,q$.
+Since $q<z^5$, there are at most four such primes in $q$.
+Write $q=\ell s$. Squarefreeness gives $(\ell,s)=1$ and
+\[
+c_q(n-m)=c_\ell(n-m)c_s(n-m)=c_\ell(n)c_s(n-m).
+\]
+
+Also $|c_s(v)|\le(s,v)\le\sum_{d\mid s,\ d\mid v}d$.
+For $d\mid s$ the conditions $\ell\mid m$ and $d\mid n-m$ are coprime,
+and their count up to $X/4$ is at most $X/(\ell d)+1$.
+Thus, termwise in the absolute sum,
+\[
+\begin{aligned}
+\left|\sum_{\substack{m\in I\\\ell\mid m}}
+\lambda(m)c_q(n-m)K_q(n-m)\right|
+&\ll L|c_\ell(n)|\sum_{d\mid s}d
+\left(\frac X{\ell d}+1\right)\\
+&=L|c_\ell(n)|
+\left(\frac{\tau(s)X}{\ell}+\sigma(s)\right).
+\end{aligned}
+\]
+\[
+\begin{aligned}
+\text{RHS of \eqref{eq:noncoprime-absolute}}
+&\ll L\sum_{z\le\ell\le P}\frac{|c_\ell(n)|}{\varphi(\ell)}
+\sum_{s\le P/\ell}\frac{\tau(s)X/\ell+\sigma(s)}{\varphi(s)}\\
+&\ll L^3\sum_{z\le\ell\le P}
+\frac{|c_\ell(n)|}{\varphi(\ell)}\cdot\frac{X+P}{\ell}\\
+&\ll \frac{XL^3}{z}=X^{9/10}L^3.
+\end{aligned}
+\]
+Using $\sum_{s\le S}\tau(s)/\varphi(s)\ll L^2$ and
+$\sigma(s)/\varphi(s)\ll L$, we obtain
+\begin{align}
+|R_{\mathrm{nc}}(n)|
+&\ll L^3\sum_{z\le\ell\le P}
+\frac{|c_\ell(n)|}{\varphi(\ell)}\frac{X+P}{\ell}
+\ll XL^3/z=X^{9/10}L^3.
+\label{eq:noncoprime-bound}
+\end{align}
+If $\ell\nmid n$, sum $1/(\ell\varphi(\ell))\ll1/z$.
+If $\ell\mid n$, its contribution is at most $2X/z$, and at most ten
+primes at least $z$ divide $n\le X=z^{10}$. This proves uniformity in
+$n$.
+
+We next remove $(m,q)=1$ from \eqref{eq:coprime-pole}. On the support of
+$\lambda$, at most $4(X/z+1)$ non-coprime integers occur. For squarefree $q$, write $d=(q,n)$ and $q=dr$.
+Then $|c_q(n)|=\varphi(d)$ and
+\begin{equation}\label{eq:absolute-singular-series}
+\sum_q\frac{\mu^2(q)|c_q(n)|}{\varphi(q)^2}
+\le\sum_{d\mid n}\frac1{\varphi(d)}\sum_{r\ge1}\frac1{\varphi(r)^2}
+\ll_\nu X^\nu.
+\end{equation}
+Together with $|\lambda K_q|\ll L$, this bounds the removal error by
+\begin{equation}\label{eq:remove-coprimality}
+O_\nu(X^{9/10+\nu})\qquad(\nu>0).
+\end{equation}
+The divisor-bound exponent is arbitrary, so it absorbs the logarithm.
+
+\subsection{Completion of the singular series}
+
+The same squarefree factorisation gives, for every $\nu>0$,
+\begin{equation}\label{eq:singular-tails}
+\sum_{q\le P}\frac{\mu^2(q)q|c_q(n)|}{\varphi(q)^2}\ll_\nu X^\nu,
+\qquad
+\sum_{q>P}\frac{\mu^2(q)|c_q(n)|}{\varphi(q)^2}\ll_\nu X^\nu/P.
+\end{equation}
+For the first bound, use
+$\sum_{r\le Y}r/\varphi(r)^2\ll\log(2Y)$ and sum $d/\varphi(d)$ over $d\mid n$.
+For the second, use $\sum_{r>Y}\varphi(r)^{-2}\ll1/Y$.
+These elementary estimates follow by expanding the factors over squarefree
+divisors. The resulting Euler products converge after the indicated
+logarithmic factor is removed.
+
+Both steps below use the absolute mass bound of Lemma~\ref{lem:weight-norms}, restated in \eqref{eq:mass-bound}:
+\[
+\sum_{m\in I}|\lambda(m)|\ll X,
+\qquad |F_\lambda|\le\sum_{m\in I}|\lambda(m)|\ll X.
+\]
+By \eqref{eq:kernel-bounds}, replacing $K_q$ by $1$ costs
+$O_\nu(X^{1+\nu}/P)$, since $\sum_m|\lambda(m)|\ll X$.
+Completing the $q$-sum has the same cost, since $|F_\lambda|\ll X$.
+The completed series is
+\begin{equation}\label{eq:singular-series}
+\begin{split}
+\mathfrak S(n)
+&=\sum_{q\ge1}\frac{\mu^2(q)c_q(n)}{\varphi(q)^2}\\
+&=2\prod_{p>2}\left(1-\frac1{(p-1)^2}\right)
+\prod_{\substack{p\mid n\\p>2}}\frac{p-1}{p-2}
+\ge2C_2\ge1.32\qquad(2\mid n),
+\end{split}
+\end{equation}
+where $C_2=\prod_{p>2}(1-(p-1)^{-2})$ and $2C_2=1.3203\ldots$.
+
+\subsection{The major-arc asymptotic and positivity}
+
+\begin{proposition}\label{prop:major-asymptotic}
+Assume $H_{7/8}$ and the parameter choices of Section~\ref{sec:notation}.
+Let $\lambda=(\log m)\rho(m)$ be the weight of Section~\ref{sec:weight}.
+Thus it is supported on $z$-rough $m\in I$, with
+$|\lambda|\le256L$, $\sum|\lambda|^2\ll XL$ and $\sum|\lambda|\ll X$.
+Use Proposition~\ref{prop:BV9} for this weight at $Q_B\ge P$.
+For $B>0$ and $0<\nu\le1/20$, uniformly for even $n\in(X/2,X]$,
+\begin{equation}\label{eq:major-asymptotic}
+\begin{split}
+I_\M(n)=\mathfrak S(n)F_\lambda
++O_{\eta,B,\nu}\bigl(&X^{1-4\eta/9}L^{19/2}+P^{3/2}L^{1/2}+XL^{-B}\\
+&+X^{9/10}L^3+X^{9/10+\nu}+X^{1+\nu}/P\bigr).
+\end{split}
+\end{equation}
+In particular, $I_\M(n)=\mathfrak S(n)F_\lambda+o(X)$.
+\end{proposition}
+
+\begin{proof}
+Use \eqref{eq:S1-removal} and \eqref{eq:pole-discretization}, and
+evaluate the pole by \eqref{eq:coprime-pole} and
+\eqref{eq:noncoprime-bound}. Then \eqref{eq:remove-coprimality} and
+\eqref{eq:singular-tails} give exactly the six errors in
+\eqref{eq:major-asymptotic}. At the stipulated $P$,
+\begin{gather*}
+P^{3/2}L^{1/2}\le X^{27/40-3\eta/2}L^{1/2},\qquad
+X^{9/10+\nu}\le X^{19/20},\\
+X^{1+\nu}/P\le2X^{11/20+\eta+\nu}\le2X^{61/100}.
+\end{gather*}
+
+Each error is $o(X)$, and this conclusion does not require a sign for
+$F_\lambda$.
+\end{proof}
+
+\begin{corollary}\label{cor:major-positive}
+Assume $H_{7/8}$. For all large $X$ and every even $n\in(X/2,X]$,
+\[
+I_\M(n)\ge0.025X.
+\]
+\end{corollary}
+
+\begin{proof}
+Proposition~\ref{prop:mass} gives $F_\lambda\ge0$ for large $X$.
+By \eqref{eq:singular-series} and Proposition~\ref{prop:major-asymptotic},
+\[
+\mathfrak S(n)F_\lambda
+\ge1.32F_\lambda
+\ge1.32\Bigl(\frac{\ccert}{8}-o(1)\Bigr)X.
+\]
+The exact rational \eqref{eq:ccert} satisfies
+$1.32\ccert/8=0.0250913982659\ldots>0.025$, and the positive margin
+absorbs the error terms.
+\end{proof}
+
+\section{Proof of Theorem 2}\label{sec:proof-conditional}
+
+\begin{proof}[Proof of Theorem~\ref{thm:conditional}]
+Let $\varepsilon>0$ and use \eqref{eq:parameters}. At each large scale
+$X$, choose $P$ as in \eqref{eq:P-window}. Corollary~\ref{cor:major-positive} supplies $c_1=0.025$ in
+Proposition~\ref{prop:duality}.
+Corollary~\ref{cor:minor-lambda} gives
+$\mathcal S\ll X^{31/40+\eta/2}L^{9/2}$ at the same $P$, and both use the
+same signed weight $\lambda$. Therefore
+\[
+|\mathcal E_X|
+\ll\frac{\mathcal S^2L}{X}
+\ll X^{31/20+\eta-1}L^{10}
+=X^{11/20+\eta}L^{10}=X^{1-t}L^{10}.
+\]
+Choose $X_0=X_0(\varepsilon)$ so that this holds at every scale at least
+$X_0$, and apply it to $Y=X/2^k$ with its own cutoff $P(Y)$.
+The constants are uniform, and the geometric sum gives
+\[
+E(X)\le X_0+
+\sum_{k\ge0}C_\varepsilon(X/2^k)^{11/20+\eta}(\log X)^{10}
+\ll_\varepsilon X^{11/20+\eta}(\log X)^{10}
+\ll_\varepsilon X^{11/20+\varepsilon}.
+\]
+
+Since $\eta<\varepsilon$, this is $O_\varepsilon(X^{11/20+\varepsilon})$.
+\end{proof}
+
+\section{Proof of Theorem 1}\label{sec:proof-main}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Theorem~\ref{thm:conditional}, together with the zero-free half-plane
+$\Re s>7/8$ in \cite[Theorem~1.1]{OA}, gives the assertion.
+\end{proof}
+
+\appendix
+\section{The exact rational mass certificate}\label{app:certificate}
+
+This appendix gives the finite arithmetic for
+\eqref{eq:cell-certificates}. The regions are exactly
+\eqref{eq:loss-regions}, and the cell tests are \eqref{eq:U2-cell-tests}
+and \eqref{eq:V4-cell-tests}. No limiting numerical integration is used.
+
+\subsection{Integer form of the cell weights}
+
+For a cell of dimension $k$ on the grid of size $n$, put
+\[
+r_i=2n+7j_i,\qquad r_i^+=r_i+7,\qquad
+q_K=20n-\sum_{i=1}^k r_i^+,\qquad s_K=r_k^+.
+\]
+Thus $x_{i,0}=r_i/(20n)$ and $u_0(K)=q_K/s_K$. Write the rational
+envelope value as $a_K/b_K$, using
+\begin{equation}\label{eq:integer-envelope}
+\frac{a_K}{b_K}=
+\begin{cases}
+1,&q_K<s_K,\\
+s_K/q_K,&q_K\ge s_K\text{ and }125s_K\ge71q_K,\\
+71/125,&q_K\ge s_K\text{ and }125s_K<71q_K.
+\end{cases}
+\end{equation}
+Reduction to lowest terms is unnecessary, and \eqref{eq:cell-majorant}
+is exactly
+\begin{equation}\label{eq:integer-cell-weight}
+W(K)=\frac{A_K}{B_K},\qquad
+A_K=7^k(20n)a_K,\qquad
+B_K=b_Kr_1\cdots r_{k-1}r_k^2.
+\end{equation}
+For $U_2$, take $(n,k)=(256,2)$ and $n>j_1\ge j_2\ge0$; the integer
+tests are
+\begin{equation}\label{eq:integer-U2-tests}
+r_1<9n,\qquad r_1+r_2+14>11n,\qquad r_1+2r_2\le20n.
+\end{equation}
+For $V_4$, take $(n,k)=(64,4)$ and $n>j_1\ge j_2\ge j_3\ge j_4\ge0$;
+the integer tests are
+\begin{equation}\label{eq:integer-V4-tests}
+r_1+r_2<9n,\quad r_1+r_2+r_3+21>11n,\quad
+r_1+r_2+r_3+2r_4\le20n.
+\end{equation}
+These are the original rational cell tests after clearing denominators.
+
+\subsection{Readable rational upper sums}
+
+For each retained cell define the integer
+\begin{equation}\label{eq:integer-ceiling}
+b(K)=\left\lceil10^{18}W(K)\right\rceil
+=\left\lfloor\frac{10^{18}A_K+B_K-1}{B_K}\right\rfloor.
+\end{equation}
+Every cell weight is rational and nonnegative, so
+$W(K)\le b(K)/10^{18}$.
+Tables~\ref{tab:U2-integers} and~\ref{tab:V4-integers} list sums of these
+integers, with rows that partition the first-coordinate index $j_1$.
+Each entry is obtained by the finite divisions and additions
+in \eqref{eq:integer-envelope}--\eqref{eq:integer-ceiling}.
+
+\begin{table}[htbp]
+\caption{The $U_2$ upper sum. The final column has denominator $10^{18}$.}
+\label{tab:U2-integers}
+\centering\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}crr@{}}
+\hline
+$j_1$ & Retained cells & $\sum b(K)$\\
+\hline
+$0$--$127$ & $0$ & $0$\\
+$128$--$159$ & $1056$ & $57250926781949766$\\
+$160$--$191$ & $2773$ & $153887915136000733$\\
+$192$--$223$ & $3376$ & $212249038575035418$\\
+$224$--$255$ & $3888$ & $309273586283258073$\\
+\hline
+Total & $11093$ & $732661466776243990$\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\caption{The $V_4$ upper sum. The final column has denominator $10^{18}$.}
+\label{tab:V4-integers}
+\centering\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}crr@{}}
+\hline
+$j_1$ & Retained cells & $\sum b(K)$\\
+\hline
+$0$--$7$ & $0$ & $0$\\
+$8$--$15$ & $60$ & $307379357895441$\\
+$16$--$23$ & $7919$ & $38542811400585796$\\
+$24$--$31$ & $8263$ & $43932663439422582$\\
+$32$--$39$ & $1926$ & $13933990209700055$\\
+$40$--$47$ & $118$ & $1295654752060197$\\
+$48$--$63$ & $0$ & $0$\\
+\hline
+Total & $18286$ & $98012499159664071$\\
+\hline
+\end{tabular}
+\end{table}
+
+The totals imply
+\begin{equation}\label{eq:certificate-comparison}
+\begin{aligned}
+\mathbf U_2&\le\frac{732661466776243990}{10^{18}}
+<\frac{732661466777}{10^{12}},\\
+\mathbf V_4&\le\frac{98012499159664071}{10^{18}}
+<\frac{98012508379}{10^{12}}.
+\end{aligned}
+\end{equation}
+The positive differences after multiplication by $10^{18}$ are
+$756010$ and $9219335929$. The final mass calculation uses the original
+upper bounds on the right; the slightly smaller table bounds are not used.
+
+\subsection{The four losses and the final subtraction}
+
+Table~\ref{tab:mass-certificate} collects the rational coefficients of
+$X/8$; the volume calculations for $L_4,U_4$ are proved in
+Lemma~\ref{lem:volume-losses}.
+
+\begin{table}[htbp]
+\caption{Rational coefficients for the four discarded families.}
+\label{tab:mass-certificate}
+\centering\small
+\renewcommand{\arraystretch}{2.45}
+\begin{tabular}{@{}clc@{}}
+\hline
+Family & Calculation & Upper coefficient\\
+\hline
+$U_2$ & $256$-grid rectangle sum & $\dfrac{732661466777}{10^{12}}$\\
+$L_4$ & $C_\omega10^5(1/20)^4/576$ & $\dfrac{71}{115200}$\\
+$U_4$ & $C_\omega10^5(3/20)^4/1728$ & $\dfrac{213}{12800}$\\
+$V_4$ & $64$-grid rectangle sum & $\dfrac{98012508379}{10^{12}}$\\
+\hline
+\end{tabular}
+\end{table}
+
+Exact subtraction gives
+\[
+1-\frac{732661466777}{10^{12}}-\frac{71}{115200}
+-\frac{213}{12800}-\frac{98012508379}{10^{12}}
+=\frac{342155430899}{2250000000000}.
+\]
+In particular,
+\[
+\ccert-\frac3{20}
+=\frac{4655430899}{2250000000000}>0.
+\]
+The envelope inequality is also certified rationally:
+\[
+\frac{71}{125}\sum_{j=0}^4\frac{(71/125)^j}{j!}
+=\frac{733930882351}{732421875000}>1.
+\]
+The accompanying script \texttt{cert1120.py} evaluates the original cell
+sums with exact rational arithmetic. Its output confirms the cell counts,
+the two upper bounds, the two volume coefficients and the displayed value
+of $\ccert$. The analytic reduction to these finite sums is proved in
+Section~\ref{sec:mass}. The script checks only the arithmetic and supplies
+no asymptotic estimate.
+
+\section*{Statements and declarations}
+
+\textbf{Competing interests.} The author has no competing interests.
+
+\textbf{Funding.} No funding was received for this work.
+
+\textbf{Data availability.} The rational certificate is specified in
+Appendix~\ref{app:certificate}. The accompanying script
+\texttt{cert1120.py} and its output reproduce the finite sums.
+
+\begin{thebibliography}{10}
+
+\bibitem{Da}
+H.~Davenport, \emph{Multiplicative Number Theory}, 2nd ed.,
+revised by H.~L.~Montgomery, Graduate Texts in Mathematics \textbf{74},
+Springer, New York, 1980.
+
+\bibitem{C4}
+P.~X.~Gallagher, Invent. Math. \textbf{11} (1970), 329--339, Lemma~1.
+
+\bibitem{HB}
+D.~R.~Heath-Brown, Canad. J. Math. \textbf{31} (1979), 231--240,
+Theorem~1 and Theorem~2(3).
+
+\bibitem{IK}
+H.~Iwaniec and E.~Kowalski, \emph{Analytic Number Theory},
+Section~3.4 and Theorem~7.13.
+
+\bibitem{C2c}
+H.~L.~Montgomery, \emph{Topics in Multiplicative Number Theory},
+Lecture Notes in Mathematics \textbf{227}, Theorem~12.2.
+
+\bibitem{OA}
+OpenAI, \emph{The Quasi-Riemann Hypothesis: A Zero-Free Half-Plane
+$\Re s>7/8$}, OpenAI Math Release preprint, 30 September 2026,
+family 003, Theorem~1.1.
+Primary source PDF: \url{https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/The-Quasi-Riemann-Hypothesis-September-30-2026/paper.pdf},\newline
+commit \texttt{adc7f1241b42e322a6451854ab7e4b4c146bf78a};\newline
+PDF SHA-256 \texttt{8fe93046f8cf5ef1ba5969c89addc02d76311adc4ee907509ff9cd96f7ec99e7}.
+
+\bibitem{Pi}
+J.~Pintz, \emph{A new explicit formula in the additive theory of primes
+with applications I. The explicit formula for the Goldbach problem and the
+Generalized Twin Prime Problem}, Acta Arith. \textbf{210} (2023), 53--94,
+doi:10.4064/aa220728-31-3.
+Equation and theorem numbers cited here are from the preprint version dated
+16 April 2018.
+
+\bibitem{PA}
+J.~Pintz and I.~Alth\"ofer, \emph{The Goldbach exceptional set: an exponent
+$7/12$ and conditional refinement}, preprint, arXiv:2610.15559, version~1
+(11 October 2026),
+Theorem~1 and Corollary~2.
+
+\bibitem{C9}
+R.~C.~Vaughan, \emph{The Hardy--Littlewood Method}, 2nd ed.,
+Lemmas~2.2 and~2.8.
+
+\end{thebibliography}
+
+\end{document}
